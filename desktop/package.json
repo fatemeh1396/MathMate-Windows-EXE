@@ -1,0 +1,58 @@
+{
+  "name": "mathmate-desktop",
+  "version": "2.0.0",
+  "description": "MathMate Windows desktop application",
+  "private": true,
+  "main": "main.cjs",
+  "author": "MathMate",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dist:win": "electron-builder --win --x64"
+  },
+  "devDependencies": {
+    "electron": "^43.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.mathmate.desktop",
+    "productName": "MathMate",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.cjs",
+      "mathmate.ico",
+      "site/**/*"
+    ],
+    "win": {
+      "icon": "mathmate.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "MathMate",
+      "artifactName": "MathMate-${version}-Windows-Setup.${ext}"
+    },
+    "portable": {
+      "artifactName": "MathMate-${version}-Windows-Portable.${ext}"
+    }
+  }
+}
