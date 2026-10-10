@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+
+<html lang="fa" dir="rtl">
+
+<!-- Mirrored from https://mathmate-web.vercel.app/ by HTTrack Website Copier/3.x [XR&CO], Sat, 10 Oct 2026 19:26:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="icon" type="image/png" href="assets/icons/favicon.png">
+
+<title>همیار ریاضی</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- ================= MOBILE INSTALL BANNER ================= -->
+<div class="mobile-install-banner" id="mobileInstallBanner" aria-hidden="true">
+    <button type="button" class="mib-close" id="mibClose" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="mib-content">
+        <img class="mib-icon" src="assets/icons/favicon(1).png" alt="">
+        <div class="mib-text">
+            <div class="mib-title" data-i18n-mib="title">همیار ریاضی</div>
+            <div class="mib-sub" data-i18n-mib="sub">همراه همه‌فن‌حریف ریاضی</div>
+        </div>
+    </div>
+    <div class="mib-actions">
+        <a class="mib-btn mib-btn-myket" id="mibMyket" href="https://myket.ir/app/com.mathmate.app" target="_blank" rel="noopener" data-i18n-mib="myket">دانلود از مایکت</a>
+        <a class="mib-btn mib-btn-bazaar" id="mibBazaar" href="https://cafebazaar.ir/app/com.mathmate.app" target="_blank" rel="noopener" data-i18n-mib="bazaar">دانلود از بازار</a>
+    </div>
+</div>
+
+
+
+<!-- Sidebar Toggle -->
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu">
+    <img class="icon" src="assets/icons/menu.svg" alt="">
+</button>
+
+<!-- Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ================= SIDEBAR (Right - RTL) ================= -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <button type="button" class="sidebar-logo" id="sidebarAvatarBtn" aria-label="آواتار" title="تغییر آواتار">
+            <img id="sidebarAvatarImg" src="assets/icons/favicon(1).png" alt="آواتار">
+        </button>
+        <div class="sidebar-title" id="sidebarAppTitle" data-i18n="app_name">همیار ریاضی</div>
+        <button class="sidebar-close" id="sidebarClose" aria-label="Close">
+            <img class="icon" src="assets/icons/close.svg" alt="">
+        </button>
+    </div>
+
+    <nav class="sidebar-nav">
+        <button class="sidebar-item active" data-nav="home" id="sidebarHome">
+            <span class="active-marker"></span>
+            <img class="icon" src="assets/icons/home.svg" alt="">
+            <span data-i18n="home">خانه</span>
+        </button>
+
+        <button class="sidebar-item" data-nav="tools" id="sidebarTools">
+            <span class="active-marker"></span>
+            <img class="icon" src="assets/icons/tools.svg" alt="">
+            <span data-i18n="tools">ابزارها</span>
+        </button>
+
+        <div class="sidebar-section-label" data-i18n="realworld_section">ریاضی در دنیای واقعی</div>
+
+        <button class="sidebar-item" data-nav="realworld" id="sidebarRealWorldToggle">
+            <span class="active-marker"></span>
+            <img class="icon" src="assets/icons/tool.svg" alt="">
+            <span data-i18n="practical_tools">ابزارهای کاربردی</span>
+            <img class="chevron" src="assets/icons/chevron.svg" alt="">
+        </button>
+
+        <div class="sidebar-submenu" id="realworldSubmenu">
+            <div class="sidebar-submenu-inner">
+            <button class="sidebar-item" data-nav="paint" id="sidebarPaint">
+                <span class="active-marker"></span>
+                <img class="icon" src="assets/icons/paint.svg" alt="">
+                <span data-i18n="paint">رنگ‌آمیزی</span>
+            </button>
+            <button class="sidebar-item" data-nav="shopping" id="sidebarShopping">
+                <span class="active-marker"></span>
+                <img class="icon" src="assets/icons/shopping.svg" alt="">
+                <span data-i18n="shopping">خرید</span>
+            </button>
+            <button class="sidebar-item" data-nav="discount" id="sidebarDiscount">
+                <span class="active-marker"></span>
+                <img class="icon" src="assets/icons/discount.svg" alt="">
+                <span data-i18n="discount">تخفیف</span>
+            </button>
+            <button class="sidebar-item" data-nav="measurement" id="sidebarMeasurement">
+                <span class="active-marker"></span>
+                <img class="icon" src="assets/icons/measurement.svg" alt="">
+                <span data-i18n="measurement">اندازه‌گیری</span>
+            </button>
+            <button class="sidebar-item" data-nav="school" id="sidebarSchool">
+                <span class="active-marker"></span>
+                <img class="icon" src="assets/icons/school.svg" alt="">
+                <span data-i18n="school">مسائل مدرسه</span>
+            </button>
+            </div>
+        </div>
+
+        <div class="sidebar-section-label" data-i18n="other">سایر</div>
+
+        <button class="sidebar-item" data-nav="settings" id="sidebarSettings">
+            <span class="active-marker"></span>
+            <img class="icon" src="assets/icons/settings.svg" alt="">
+            <span data-i18n="settings">تنظیمات</span>
+        </button>
+
+        <button class="sidebar-item" data-nav="about" id="sidebarAbout">
+            <span class="active-marker"></span>
+            <img class="icon" src="assets/icons/about.svg" alt="">
+            <span data-i18n="about">درباره ما</span>
+        </button>
+    </nav>
+</aside>
+
+<div class="app">
+
+    <!-- ================= صفحه ماشین حساب ================= -->
+
+    <section class="calculator-page page" id="calculatorPage">
+
+        <div class="page-header">
+            <button class="back-btn" id="calculatorBack"><img class="back-arrow" src="assets/icons/arrow-right.svg" alt=""><span data-i18n="back">بازگشت</span></button>
+            <h2 data-i18n="calc">ماشین حساب</h2>
+        </div>
+
+        <div class="calculator-box">
+
+            <div class="calculator-display" id="calculatorDisplay">
+                0
+            </div>
+
+            <div class="calculator-buttons">
+
+                <button class="calc-btn operator" data-value="C"><img class="calc-symbol" src="assets/icons/clear.svg" alt=""></button>
+                <button class="calc-btn operator" data-value="DEL"><img class="calc-symbol" src="assets/icons/backspace.svg" alt=""></button>
+                <button class="calc-btn operator" data-value="%"><img class="calc-symbol" src="assets/icons/percent.svg" alt=""></button>
+                <button class="calc-btn operator" data-value="/"><img class="calc-symbol" src="assets/icons/divide.svg" alt=""></button>
+
+                <button class="calc-btn" data-value="1">1</button>
+                <button class="calc-btn" data-value="2">2</button>
+                <button class="calc-btn" data-value="3">3</button>
+                <button class="calc-btn operator" data-value="+"><img class="calc-symbol" src="assets/icons/plus.svg" alt=""></button>
+
+                <button class="calc-btn" data-value="4">4</button>
+                <button class="calc-btn" data-value="5">5</button>
+                <button class="calc-btn" data-value="6">6</button>
+                <button class="calc-btn operator" data-value="-"><img class="calc-symbol" src="assets/icons/minus.svg" alt=""></button>
+
+                <button class="calc-btn" data-value="7">7</button>
+                <button class="calc-btn" data-value="8">8</button>
+                <button class="calc-btn" data-value="9">9</button>
+                <button class="calc-btn operator" data-value="*"><img class="calc-symbol" src="assets/icons/multiply.svg" alt=""></button>
+
+                <button class="calc-btn zero" data-value="0">0</button>
+                <button class="calc-btn" data-value=".">.</button>
+                <button class="calc-btn equals" data-value="="><img class="calc-symbol" src="assets/icons/equals.svg" alt=""></button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= صفحه مضرب‌ها ================= -->
+
+    <section class="multiples-page page" id="multiplesPage">
+
+        <div class="page-header">
+            <button class="back-btn" id="multiplesBack"><img class="back-arrow" src="assets/icons/arrow-right.svg" alt=""><span data-i18n="back">بازگشت</span></button>
+            <h2 data-i18n="multiples">مضرب‌ها</h2>
+        </div>
+
+        <div class="multiples-box">
+
+            <div class="multiples-intro">
+                <div class="multiples-icon"><img class="intro-icon-image" src="assets/icons/multiples.svg" alt=""></div>
+
+                <h2>پیدا کردن مضرب‌ها</h2>
+
+                <p>
+                    یک عدد وارد کن تا مضرب‌های آن را پیدا کنیم.
+                </p>
+            </div>
+
+            <div class="input-group">
+
+                <label for="multipleNumber">
+                    عدد مورد نظر
+                </label>
+
+                <input
+                    type="number"
+                    id="multipleNumber"
+                    placeholder="مثلاً 5"
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label for="multipleCount">
+                    چند مضرب نمایش داده شود؟
+                </label>
+
+                <input
+                    type="number"
+                    id="multipleCount"
+                    placeholder="مثلاً 10"
+                >
+
+            </div>
+
+            <button class="calculate-multiples-btn" id="calculateMultiples">
+                پیدا کردن مضرب‌ها 
+            </button>
+
+            <div class="multiples-result" id="multiplesResult">
+
+                <h3>مضرب‌های عدد</h3>
+
+                <div class="multiples-list" id="multiplesList">
+                    <!-- نتیجه اینجا نمایش داده می‌شود -->
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= صفحه مساحت و محیط ================= -->
+
+    <section class="geometry-page page" id="geometryPage">
+
+        <div class="page-header">
+            <button class="back-btn" id="geometryBack"><img class="back-arrow" src="assets/icons/arrow-right.svg" alt=""><span data-i18n="back">بازگشت</span></button>
+            <h2 data-i18n="geometry">مساحت و محیط</h2>
+        </div>
+
+        <div class="geometry-box">
+
+            <div class="geometry-intro">
+                <div class="geometry-icon"><img class="intro-icon-image" src="assets/icons/geometry.svg" alt=""></div>
+
+                <h2>محاسبه مساحت و محیط</h2>
+
+                <p>
+                    شکل مورد نظر را انتخاب کن و اندازه‌های آن را وارد کن.
+                </p>
+            </div>
+
+            <div class="shape-grid">
+
+                <button class="shape-card active" data-shape="rectangle">
+                    
+                    <span>مستطیل</span>
+                </button>
+
+                <button class="shape-card" data-shape="square">
+                    
+                    <span>مربع</span>
+                </button>
+
+                <button class="shape-card" data-shape="triangle">
+                    
+                    <span>مثلث</span>
+                </button>
+
+                <button class="shape-card" data-shape="circle">
+                    
+                    <span>دایره</span>
+                </button>
+
+            </div>
+
+            <div class="geometry-inputs" id="geometryInputs">
+                <!-- JavaScript این قسمت را تغییر می‌دهد -->
+            </div>
+
+            <button class="calculate-geometry-btn" id="calculateGeometry">
+                محاسبه کن 
+            </button>
+
+            <div class="geometry-result" id="geometryResult">
+
+                <div class="result-row">
+                    <span>مساحت</span>
+                    <strong id="areaResult">—</strong>
+                </div>
+
+                <div class="result-row">
+                    <span>محیط</span>
+                    <strong id="perimeterResult">—</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= صفحه ب.م.م و ک.م.م ================= -->
+
+    <section class="gcd-lcm-page page" id="gcdLcmPage">
+
+        <div class="page-header">
+            <button class="back-btn" id="gcdLcmBack"><img class="back-arrow" src="assets/icons/arrow-right.svg" alt=""><span data-i18n="back">بازگشت</span></button>
+            <h2 data-i18n="gcd_lcm">ب.م.م و ک.م.م</h2>
+        </div>
+
+        <div class="gcd-lcm-box">
+
+            <div class="gcd-lcm-intro">
+                <div class="gcd-lcm-icon"><img class="intro-icon-image" src="assets/icons/gcd.svg" alt=""></div>
+
+                <h2>محاسبه ب.م.م و ک.م.م</h2>
+
+                <p>
+                    دو عدد وارد کن تا ب.م.م و ک.م.م آن‌ها را پیدا کنیم.
+                </p>
+            </div>
+
+            <div class="input-group">
+
+                <label for="gcdNumber1">عدد اول</label>
+
+                <input
+                    type="number"
+                    id="gcdNumber1"
+                    placeholder="مثلاً 12"
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label for="gcdNumber2">عدد دوم</label>
+
+                <input
+                    type="number"
+                    id="gcdNumber2"
+                    placeholder="مثلاً 18"
+                >
+
+            </div>
+
+            <button class="calculate-gcd-lcm-btn" id="calculateGcdLcm">
+                محاسبه کن 
+            </button>
+
+            <div class="gcd-lcm-result" id="gcdLcmResult">
+
+                <div class="result-row">
+                    <span>ب.م.م</span>
+                    <strong id="gcdResult">—</strong>
+                </div>
+
+                <div class="result-row">
+                    <span>ک.م.م</span>
+                    <strong id="lcmResult">—</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= صفحه آموزش ================= -->
+
+    <section class="learning-page page" id="learningPage">
+
+        <div class="page-header">
+            <button class="back-btn" id="learningBack"><img class="back-arrow" src="assets/icons/arrow-right.svg" alt=""><span data-i18n="back">بازگشت</span></button>
+            <h2 data-i18n="learning">آموزش</h2>
+        </div>
+
+        <div class="learning-box">
+
+            <div class="learning-page-intro">
+
+                <div class="learning-page-icon"><img class="intro-icon-image" src="assets/icons/learning.svg" alt=""></div>
+
+                <h2>دنبال چی می‌گردی؟</h2>
+
+                <p>
+                    موضوع مورد نظرت را وارد کن تا فیلم‌های آموزشی مرتبط را پیدا کنیم.
+                </p>
+
+            </div>
+
+            <div class="input-group">
+
+                <label for="learningSearch">
+                    موضوع آموزشی
+                </label>
+
+                <input
+                    type="text"
+                    id="learningSearch"
+                    placeholder="مثلاً آموزش کسر کلاس هفتم"
+                >
+
+            </div>
+
+            <div class="learning-search-buttons">
+
+                <button
+                    class="search-video-btn aparat-btn"
+                    id="searchAparat"
+                >
+                     جستجو در آپارات
+                </button>
+
+                <button
+                    class="search-video-btn youtube-btn"
+                    id="searchYoutube"
+                >
+                     جستجو در یوتیوب
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= صفحه شمارنده‌ها ================= -->
+
+    <section class="factors-page page" id="factorsPage">
+
+        <div class="page-header">
+
+            <button class="back-btn" id="factorsBack"><img class="back-arrow" src="assets/icons/arrow-right.svg" alt=""><span data-i18n="back">بازگشت</span></button>
+
+            <h2 data-i18n="factors">شمارنده‌ها</h2>
+
+        </div>
+
+        <div class="factors-box">
+
+            <div class="factors-intro">
+
+                <div class="factors-icon"><img class="intro-icon-image" src="assets/icons/factors.svg" alt=""></div>
+
+                <h2>پیدا کردن شمارنده‌ها</h2>
+
+                <p>
+                    یک عدد وارد کن تا شمارنده‌های آن را پیدا کنیم.
+                </p>
+
+            </div>
+
+            <div class="input-group">
+
+                <label for="factorsNumber">
+                    عدد مورد نظر
+                </label>
+
+                <input
+                    type="number"
+                    id="factorsNumber"
+                    placeholder="مثلاً 24"
+                >
+
+            </div>
+
+            <button
+                class="calculate-factors-btn"
+                id="calculateFactors"
+            >
+                پیدا کردن شمارنده‌ها 
+            </button>
+
+            <div
+                class="factors-result"
+                id="factorsResult"
+            >
+
+                <h3>
+                    شمارنده‌های عدد
+                </h3>
+
+                <div
+                    class="factors-list"
+                    id="factorsList"
+                >
+                    <!-- نتیجه اینجا قرار می‌گیرد -->
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= صفحه تبدیل تاریخ ================= -->
+
+    <section class="date-page page" id="datePage">
+
+        <div class="page-header">
+
+            <button class="back-btn" id="dateBack"><img class="back-arrow" src="assets/icons/arrow-right.svg" alt=""><span data-i18n="back">بازگشت</span></button>
+
+            <h2 data-i18n="date_convert">تبدیل تاریخ</h2>
+
+        </div>
+
+        <div class="date-box">
+
+            <div class="date-intro">
+
+                <div class="date-icon"><img class="intro-icon-image" src="assets/icons/date.svg" alt=""></div>
+
+                <h2>تبدیل تاریخ</h2>
+
+                <p>
+                    تاریخ شمسی، میلادی یا قمری را وارد کن
+                    تا به تقویم‌های دیگر تبدیل شود.
+                </p>
+
+            </div>
+
+            <div class="date-calendar-options">
+
+                <button
+                    class="date-calendar-option active"
+                    data-calendar="jalali"
+                >
+                    
+                    <span>شمسی</span>
+                </button>
+
+                <button
+                    class="date-calendar-option"
+                    data-calendar="gregorian"
+                >
+                    
+                    <span>میلادی</span>
+                </button>
+
+                <button
+                    class="date-calendar-option"
+                    data-calendar="hijri"
+                >
+                    
+                    <span>قمری</span>
+                </button>
+
+            </div>
+
+            <div class="date-inputs">
+
+                <div class="date-input-group">
+
+                    <label for="dateYear">
+                        سال
+                    </label>
+
+                    <input
+                        type="number"
+                        id="dateYear"
+                        placeholder="مثلاً 1405"
+                    >
+
+                </div>
+
+                <div class="date-input-group">
+
+                    <label for="dateMonth">
+                        ماه
+                    </label>
+
+                    <input
+                        type="number"
+                        id="dateMonth"
+                        placeholder="مثلاً 5"
+                        min="1"
+                        max="12"
+                    >
+
+                </div>
+
+                <div class="date-input-group">
+
+                    <label for="dateDay">
+                        روز
+                    </label>
+
+                    <input
+                        type="number"
+                        id="dateDay"
+                        placeholder="مثلاً 27"
+                        min="1"
+                        max="31"
+                    >
+
+                </div>
+
+            </div>
+
+            <button
+                class="calculate-date-btn"
+                id="calculateDate"
+            >
+                تبدیل تاریخ 
+            </button>
+
+            <div
+                class="date-result"
+                id="dateResult"
+            >
+
+                <h3>
+                     نتیجه تبدیل
+                </h3>
+
+                <div class="date-result-item">
+
+                    <span>
+                         شمسی
+                    </span>
+
+                    <strong id="jalaliResult">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="date-result-item">
+
+                    <span>
+                         میلادی
+                    </span>
+
+                    <strong id="gregorianResult">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="date-result-item">
+
+                    <span>
+                         قمری
+                    </span>
+
+                    <strong id="hijriResult">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= صفحه تبدیل واحد ================= -->
+
+    <section class="unit-page page" id="unitPage">
+
+        <div class="page-header">
+
+            <button class="back-btn" id="unitBack"><img class="back-arrow" src="assets/icons/arrow-right.svg" alt=""><span data-i18n="back">بازگشت</span></button>
+
+            <h2 data-i18n="unit_convert">تبدیل واحد</h2>
+
+        </div>
+
+        <div class="unit-page-box">
+
+            <div class="unit-page-intro">
+
+                <div class="unit-page-icon"><img class="intro-icon-image" src="assets/icons/unit.svg" alt=""></div>
+
+                <h2>تبدیل واحد</h2>
+
+                <p>
+                    مقدار مورد نظر را وارد کن و واحد آن را تبدیل کن.
+                </p>
+
+            </div>
+
+            <div class="unit-types">
+
+                <button
+                    class="unit-type active"
+                    data-unit="length"
+                >
+                    
+                    <span>طول</span>
+                </button>
+
+                <button
+                    class="unit-type"
+                    data-unit="weight"
+                >
+                    
+                    <span>وزن</span>
+                </button>
+
+                <button
+                    class="unit-type"
+                    data-unit="volume"
+                >
+                    
+                    <span>حجم</span>
+                </button>
+
+                <button
+                    class="unit-type"
+                    data-unit="temperature"
+                >
+                    
+                    <span>دما</span>
+                </button>
+
+            </div>
+
+            <div class="unit-input-group">
+
+                <label for="unitValue">
+                    مقدار
+                </label>
+
+                <input
+                    type="number"
+                    id="unitValue"
+                    placeholder="مثلاً 10"
+                >
+
+            </div>
+
+            <div class="unit-input-group">
+
+                <label for="unitFrom">
+                    تبدیل از
+                </label>
+
+                <select id="unitFrom"></select>
+
+            </div>
+
+            <div class="unit-input-group">
+
+                <label for="unitTo">
+                    تبدیل به
+                </label>
+
+                <select id="unitTo"></select>
+
+            </div>
+
+            <button
+                class="calculate-btn"
+                id="calculateUnit"
+            >
+                تبدیل واحد
+            </button>
+
+            <div
+                class="unit-result"
+                id="unitResult"
+            >
+
+                <span>
+                    نتیجه
+                </span>
+
+                <strong id="unitResultValue">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= صفحه محاسبه درصد ================= -->
+
+    <section class="percentage-page page" id="percentagePage">
+
+        <div class="page-header">
+
+            <button class="back-btn" id="percentageBack"><img class="back-arrow" src="assets/icons/arrow-right.svg" alt=""><span data-i18n="back">بازگشت</span></button>
+
+            <h2 data-i18n="percentage">محاسبه درصد</h2>
+
+        </div>
+
+        <div class="percentage-box">
+
+            <div class="percentage-intro">
+
+                <div class="percentage-icon"><img class="intro-icon-image" src="assets/icons/percentage.svg" alt=""></div>
+
+                <h2>محاسبه درصد</h2>
+
+                <p>
+                    درصد و عدد مورد نظر را وارد کن تا مقدار درصد را حساب کنیم.
+                </p>
+
+            </div>
+
+            <div class="input-group">
+
+                <label for="percentageValue">
+                    درصد مورد نظر
+                </label>
+
+                <input
+                    type="number"
+                    id="percentageValue"
+                    placeholder="مثلاً 20"
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label for="percentageNumber">
+                    عدد
+                </label>
+
+                <input
+                    type="number"
+                    id="percentageNumber"
+                    placeholder="مثلاً 500"
+                >
+
+            </div>
+
+            <button
+                class="calculate-percentage-btn"
+                id="calculatePercentage"
+            >
+                محاسبه کن 
+            </button>
+
+            <div
+                class="percentage-result"
+                id="percentageResult"
+            >
+
+                <div class="result-row">
+
+                    <span>
+                        نتیجه
+                    </span>
+
+                    <strong id="percentageResultValue">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= صفحه تبدیل زمان ================= -->
+
+    <div class="time-page page" id="timePage">
+
+        <div class="page-header">
+
+            <h2> تبدیل زمان</h2>
+
+            <button class="back-btn" id="timeBack"><img class="back-arrow" src="assets/icons/arrow-right.svg" alt=""><span data-i18n="back">برگشت</span></button>
+
+        </div>
+
+        <div class="time-page-box">
+
+            <div class="time-page-intro">
+
+                <div class="time-page-icon"><img class="intro-icon-image" src="assets/icons/time.svg" alt=""></div>
+
+                <h2>تبدیل زمان</h2>
+
+                <p>
+                    زمان را به‌سادگی بین ثانیه، دقیقه، ساعت و روز تبدیل کنید.
+                </p>
+
+            </div>
+
+            <div class="time-conversion-row">
+
+                <div class="time-input-group">
+
+                    <label for="timeValue">
+                        مقدار
+                    </label>
+
+                    <input
+                        type="number"
+                        id="timeValue"
+                        placeholder="مثلاً 120"
+                        step="any"
+                    >
+
+                </div>
+
+                <div class="time-arrow">
+                    
+                </div>
+
+                <div class="time-input-group">
+
+                    <label for="timeFrom">
+                        از
+                    </label>
+
+                    <select id="timeFrom">
+
+                        <option value="second">
+                            ثانیه
+                        </option>
+
+                        <option value="minute">
+                            دقیقه
+                        </option>
+
+                        <option value="hour" selected>
+                            ساعت
+                        </option>
+
+                        <option value="day">
+                            روز
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="time-input-group">
+
+                    <label for="timeTo">
+                        به
+                    </label>
+
+                    <select id="timeTo">
+
+                        <option value="second">
+                            ثانیه
+                        </option>
+
+                        <option value="minute" selected>
+                            دقیقه
+                        </option>
+
+                        <option value="hour">
+                            ساعت
+                        </option>
+
+                        <option value="day">
+                            روز
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <button
+                class="calculate-time-btn"
+                id="calculateTimeBtn"
+            >
+                تبدیل زمان
+            </button>
+
+            <div
+                class="time-result"
+                id="timeResult"
+            >
+
+                <span>
+                    نتیجه تبدیل:
+                </span>
+
+                <strong id="timeResultValue">
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= صفحه رنگ‌آمیزی (Paint) ================= -->
+    <section class="page realworld-page" id="paintPage">
+        <div class="page-header">
+            <button class="back-btn" id="paintBack"><img class="back-arrow" src="assets/icons/arrow-right.svg" alt=""><span data-i18n="back">بازگشت</span></button>
+            <h2>رنگ‌آمیزی دیوار</h2>
+        </div>
+        <div class="realworld-box">
+            <div class="realworld-intro">
+                <div class="realworld-icon" style="background:#FCE7F3;"><img class="intro-icon-image" src="assets/icons/paint.svg" alt=""></div>
+                <h2>محاسبه رنگ دیوار</h2>
+                <p>عرض، ارتفاع، مساحت بازشوها و تعداد دست رنگ را وارد کن.</p>
+            </div>
+            <div class="input-group">
+                <label>عرض دیوار (متر)</label>
+                <input type="number" id="paintWidth" placeholder="مثلاً 4" step="any">
+            </div>
+            <div class="input-group">
+                <label>ارتفاع دیوار (متر)</label>
+                <input type="number" id="paintHeight" placeholder="مثلاً 3" step="any">
+            </div>
+            <div class="input-group">
+                <label>مساحت در و پنجره (متر مربع)</label>
+                <input type="number" id="paintOpenings" placeholder="مثلاً 2" value="0" step="any">
+            </div>
+            <div class="input-group">
+                <label>تعداد دست رنگ</label>
+                <input type="number" id="paintCoats" placeholder="مثلاً 2" value="2" min="1">
+            </div>
+            <div class="input-group">
+                <label>پوشش هر لیتر رنگ (متر مربع)</label>
+                <input type="number" id="paintCoverage" placeholder="مثلاً 10" value="10" step="any">
+            </div>
+            <button class="calculate-btn" id="calculatePaint">محاسبه کن </button>
+            <div class="realworld-result" id="paintResult">
+                <div class="result-row"><span>رنگ مورد نیاز</span><strong id="paintLiters">—</strong></div>
+                <div class="steps-box" id="paintSteps"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= صفحه خرید (Shopping) ================= -->
+    <section class="page realworld-page" id="shoppingPage">
+        <div class="page-header">
+            <button class="back-btn" id="shoppingBack"><img class="back-arrow" src="assets/icons/arrow-right.svg" alt=""><span data-i18n="back">بازگشت</span></button>
+            <h2>هزینه خرید</h2>
+        </div>
+        <div class="realworld-box">
+            <div class="realworld-intro">
+                <div class="realworld-icon" style="background:#DBEAFE;"><img class="intro-icon-image" src="assets/icons/shopping.svg" alt=""></div>
+                <h2>محاسبه هزینه خرید</h2>
+                <p>قیمت، تعداد و درصد تخفیف را وارد کن.</p>
+            </div>
+            <div class="input-group">
+                <label>قیمت کالا (تومان)</label>
+                <input type="number" id="shopPrice" placeholder="مثلاً 50000" step="any">
+            </div>
+            <div class="input-group">
+                <label>تعداد</label>
+                <input type="number" id="shopQty" placeholder="مثلاً 3" min="1">
+            </div>
+            <div class="input-group">
+                <label>درصد تخفیف</label>
+                <input type="number" id="shopDiscount" placeholder="مثلاً 10" value="0" min="0" max="100">
+            </div>
+            <button class="calculate-btn" id="calculateShopping">محاسبه کن </button>
+            <div class="realworld-result" id="shoppingResult">
+                <div class="result-row"><span>قیمت اولیه</span><strong id="shopSubtotal">—</strong></div>
+                <div class="result-row"><span>مبلغ تخفیف</span><strong id="shopDiscountAmount">—</strong></div>
+                <div class="result-row"><span>قیمت نهایی</span><strong id="shopTotal">—</strong></div>
+                <div class="steps-box" id="shopSteps"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= صفحه تخفیف (Discount) ================= -->
+    <section class="page realworld-page" id="discountPage">
+        <div class="page-header">
+            <button class="back-btn" id="discountBack"><img class="back-arrow" src="assets/icons/arrow-right.svg" alt=""><span data-i18n="back">بازگشت</span></button>
+            <h2>درصد و تخفیف</h2>
+        </div>
+        <div class="realworld-box">
+            <div class="realworld-intro">
+                <div class="realworld-icon" style="background:#FEF3C7;"><img class="intro-icon-image" src="assets/icons/discount.svg" alt=""></div>
+                <h2>محاسبه درصد و تخفیف</h2>
+                <p>مبلغ و درصد را وارد کن تا مبلغ تخفیف و قیمت نهایی را ببینی.</p>
+            </div>
+            <div class="input-group">
+                <label>مبلغ (تومان)</label>
+                <input type="number" id="discountPrice" placeholder="مثلاً 200000" step="any">
+            </div>
+            <div class="input-group">
+                <label>درصد</label>
+                <input type="number" id="discountPercent" placeholder="مثلاً 20" step="any">
+            </div>
+            <button class="calculate-btn" id="calculateDiscount">محاسبه کن </button>
+            <div class="realworld-result" id="discountResult">
+                <div class="result-row"><span>مبلغ تخفیف</span><strong id="discountAmount">—</strong></div>
+                <div class="result-row"><span>قیمت نهایی</span><strong id="discountFinal">—</strong></div>
+                <div class="steps-box" id="discountSteps"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= صفحه اندازه‌گیری (Measurement) ================= -->
+    <section class="page realworld-page" id="measurementPage">
+        <div class="page-header">
+            <button class="back-btn" id="measurementBack"><img class="back-arrow" src="assets/icons/arrow-right.svg" alt=""><span data-i18n="back">بازگشت</span></button>
+            <h2>اندازه‌گیری</h2>
+        </div>
+        <div class="realworld-box">
+            <div class="realworld-intro">
+                <div class="realworld-icon" style="background:#DCFCE7;"><img class="intro-icon-image" src="assets/icons/measurement.svg" alt=""></div>
+                <h2>محاسبه مساحت، محیط و حجم</h2>
+                <p>طول و عرض را وارد کن. ارتفاع اختیاری است.</p>
+            </div>
+            <div class="input-group">
+                <label>طول (متر)</label>
+                <input type="number" id="measLength" placeholder="مثلاً 5" step="any">
+            </div>
+            <div class="input-group">
+                <label>عرض (متر)</label>
+                <input type="number" id="measWidth" placeholder="مثلاً 4" step="any">
+            </div>
+            <div class="input-group">
+                <label>ارتفاع (متر) — اختیاری</label>
+                <input type="number" id="measHeight" placeholder="مثلاً 3" step="any">
+            </div>
+            <button class="calculate-btn" id="calculateMeasurement">محاسبه کن </button>
+            <div class="realworld-result" id="measurementResult">
+                <div class="result-row"><span>مساحت</span><strong id="measArea">—</strong></div>
+                <div class="result-row"><span>محیط</span><strong id="measPerimeter">—</strong></div>
+                <div class="result-row" id="measVolumeRow" style="display:none;"><span>حجم</span><strong id="measVolume">—</strong></div>
+                <div class="steps-box" id="measSteps"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= صفحه مسائل مدرسه ================= -->
+    <section class="page realworld-page" id="schoolPage">
+        <div class="page-header">
+            <button class="back-btn" id="schoolBack"><img class="back-arrow" src="assets/icons/arrow-right.svg" alt=""><span data-i18n="back">بازگشت</span></button>
+            <h2>مسائل مدرسه</h2>
+        </div>
+        <div class="realworld-box">
+            <div class="realworld-intro">
+                <div class="realworld-icon" style="background:#E0E7FF;"><img class="intro-icon-image" src="assets/icons/school.svg" alt=""></div>
+                <h2>مسائل رایج مدرسه</h2>
+                <p>میانگین، تناسب یا سرعت/مسافت/زمان را انتخاب کن و اعداد را وارد کن.</p>
+            </div>
+
+            <div class="school-tabs">
+                <button class="school-tab active" data-tab="average">میانگین</button>
+                <button class="school-tab" data-tab="proportion">تناسب</button>
+                <button class="school-tab" data-tab="speed">سرعت / مسافت</button>
+            </div>
+
+            <div id="schoolAverage" class="school-form">
+                <div class="input-group">
+                    <label>اعداد (با ویرگول جدا کن)</label>
+                    <input type="text" id="avgNumbers" placeholder="مثلاً 18, 17, 19, 16">
+                </div>
+                <button class="calculate-btn" id="calcAverage">محاسبه میانگین </button>
+            </div>
+
+            <div id="schoolProportion" class="school-form" style="display:none;">
+                <div class="input-group"><label>a</label><input type="number" id="propA" placeholder="مثلاً 2"></div>
+                <div class="input-group"><label>b</label><input type="number" id="propB" placeholder="مثلاً 5"></div>
+                <div class="input-group"><label>c</label><input type="number" id="propC" placeholder="مثلاً 6"></div>
+                <p style="font-size:13px;color:var(--text-light);margin-bottom:12px;">فرمول: a / b = c / x    x = (b × c) / a</p>
+                <button class="calculate-btn" id="calcProportion">محاسبه x </button>
+            </div>
+
+            <div id="schoolSpeed" class="school-form" style="display:none;">
+                <div class="input-group"><label>سرعت (اختیاری)</label><input type="number" id="spdSpeed" placeholder="مثلاً 60" step="any"></div>
+                <div class="input-group"><label>زمان (اختیاری)</label><input type="number" id="spdTime" placeholder="مثلاً 2" step="any"></div>
+                <div class="input-group"><label>مسافت (اختیاری)</label><input type="number" id="spdDist" placeholder="مثلاً 120" step="any"></div>
+                <p style="font-size:13px;color:var(--text-light);margin-bottom:12px;">دو مقدار را وارد کن تا سومی محاسبه شود.</p>
+                <button class="calculate-btn" id="calcSpeed">محاسبه کن </button>
+            </div>
+
+            <div class="realworld-result" id="schoolResult">
+                <div class="steps-box" id="schoolSteps"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= صفحه ابزارها ================= -->
+
+    <section class="tools-page page" id="toolsPage">
+
+        <div class="page-header">
+            <h2 data-i18n="tools">ابزارها</h2>
+        </div>
+
+        <div class="tools-page-box">
+
+            <div class="tools-page-intro">
+
+                <div class="tools-page-icon"><img class="intro-icon-image" src="assets/icons/tools.svg" alt=""></div>
+
+                <h2><span data-i18n="tools_section_title">ابزارهای همیار ریاضی</span></h2>
+
+                <p>
+                    <span data-i18n="tools_page_desc">ابزار مورد نظرت را انتخاب کن و شروع کن.</span>
+                </p>
+
+            </div>
+
+            <div class="tools-list">
+
+                <button class="tool-list-item" id="toolsCalculator">
+
+                    <div class="tool-list-icon calculator-icon"><img src="assets/icons/calculator.svg" alt=""></div>
+
+                    <div class="tool-list-text">
+
+                        <h3 data-i18n="calc">ماشین حساب</h3>
+
+                        <p data-i18n="desc_calc">
+                            محاسبات سریع و آسان
+                        </p>
+
+                    </div>
+
+                    <span class="tool-list-arrow"><img src="assets/icons/arrow-left.svg" alt=""></span>
+
+                </button>
+
+
+                <button class="tool-list-item" id="toolsGeometry">
+
+                    <div class="tool-list-icon geometry-icon"><img src="assets/icons/geometry.svg" alt=""></div>
+
+                    <div class="tool-list-text">
+
+                        <h3 data-i18n="geometry">مساحت و محیط</h3>
+
+                        <p data-i18n="desc_geometry">
+                            محاسبه شکل‌های هندسی
+                        </p>
+
+                    </div>
+
+                    <span class="tool-list-arrow"><img src="assets/icons/arrow-left.svg" alt=""></span>
+
+                </button>
+
+
+                <button class="tool-list-item" id="toolsGcdLcm">
+
+                    <div class="tool-list-icon gcd-icon"><img src="assets/icons/gcd.svg" alt=""></div>
+
+                    <div class="tool-list-text">
+
+                        <h3 data-i18n="gcd_lcm">ب.م.م و ک.م.م</h3>
+
+                        <p data-i18n="desc_gcd">
+                            محاسبه سریع اعداد
+                        </p>
+
+                    </div>
+
+                    <span class="tool-list-arrow"><img src="assets/icons/arrow-left.svg" alt=""></span>
+
+                </button>
+
+
+                <button class="tool-list-item" id="toolsMultiples">
+
+                    <div class="tool-list-icon multiples-icon"><img src="assets/icons/multiples.svg" alt=""></div>
+
+                    <div class="tool-list-text">
+
+                        <h3 data-i18n="multiples">مضرب‌ها</h3>
+
+                        <p data-i18n="desc_multiples">
+                            پیدا کردن مضرب‌های یک عدد
+                        </p>
+
+                    </div>
+
+                    <span class="tool-list-arrow"><img src="assets/icons/arrow-left.svg" alt=""></span>
+
+                </button>
+
+
+                <button class="tool-list-item" id="toolsLearning">
+
+                    <div class="tool-list-icon learning-icon"><img src="assets/icons/learning.svg" alt=""></div>
+
+                    <div class="tool-list-text">
+
+                        <h3 data-i18n="learning">آموزش</h3>
+
+                        <p data-i18n="desc_learning">
+                            جستجوی فیلم‌های آموزشی
+                        </p>
+
+                    </div>
+
+                    <span class="tool-list-arrow"><img src="assets/icons/arrow-left.svg" alt=""></span>
+
+                </button>
+
+
+                <button class="tool-list-item" id="toolsFactors">
+
+                    <div class="tool-list-icon factors-icon"><img src="assets/icons/factors.svg" alt=""></div>
+
+                    <div class="tool-list-text">
+
+                        <h3 data-i18n="factors">شمارنده‌ها</h3>
+
+                        <p data-i18n="desc_factors">
+                            پیدا کردن شمارنده‌های یک عدد
+                        </p>
+
+                    </div>
+
+                    <span class="tool-list-arrow"><img src="assets/icons/arrow-left.svg" alt=""></span>
+
+                </button>
+
+
+                <button class="tool-list-item" id="toolsDate">
+
+                    <div class="tool-list-icon date-icon"><img src="assets/icons/date.svg" alt=""></div>
+
+                    <div class="tool-list-text">
+
+                        <h3 data-i18n="date_convert">تبدیل تاریخ</h3>
+
+                        <p data-i18n="desc_date">
+                            تبدیل تاریخ شمسی، میلادی و قمری
+                        </p>
+
+                    </div>
+
+                    <span class="tool-list-arrow"><img src="assets/icons/arrow-left.svg" alt=""></span>
+
+                </button>
+
+
+                <button class="tool-list-item" id="toolsUnit">
+
+                    <div class="tool-list-icon unit-icon"><img src="assets/icons/unit.svg" alt=""></div>
+
+                    <div class="tool-list-text">
+
+                        <h3 data-i18n="unit_convert">تبدیل واحد</h3>
+
+                        <p data-i18n="desc_unit">
+                            تبدیل واحدهای مختلف
+                        </p>
+
+                    </div>
+
+                    <span class="tool-list-arrow"><img src="assets/icons/arrow-left.svg" alt=""></span>
+
+                </button>
+
+
+                <button class="tool-list-item" id="toolsPercentage">
+
+                    <div class="tool-list-icon percentage-ico"><img src="assets/icons/percentage.svg" alt=""></div>
+
+                    <div class="tool-list-text">
+
+                        <h3 data-i18n="percentage">محاسبه درصد</h3>
+
+                        <p data-i18n="desc_percentage">
+                            محاسبه درصد یک عدد
+                        </p>
+
+                    </div>
+
+                    <span class="tool-list-arrow"><img src="assets/icons/arrow-left.svg" alt=""></span>
+
+                </button>
+
+
+                <button class="tool-list-item" id="toolsTime">
+                    <div class="tool-list-icon time-icon"><img src="assets/icons/time.svg" alt=""></div>
+                    <div class="tool-list-text">
+                        <h3 data-i18n="time_convert">تبدیل زمان</h3>
+                        <p data-i18n="desc_time">تبدیل ثانیه، دقیقه، ساعت و روز</p>
+                    </div>
+                    <div class="tool-list-arrow"><img src="assets/icons/arrow-left.svg" alt=""></div>
+                </button>
+
+                <button class="tool-list-item" id="toolsPaint">
+                    <div class="tool-list-icon"><img src="assets/icons/paint.svg" alt=""></div>
+                    <div class="tool-list-text">
+                        <h3 data-i18n="paint">رنگ‌آمیزی</h3>
+                        <p data-i18n="desc_paint">محاسبه رنگ دیوار</p>
+                    </div>
+                    <div class="tool-list-arrow"><img src="assets/icons/arrow-left.svg" alt=""></div>
+                </button>
+
+                <button class="tool-list-item" id="toolsShopping">
+                    <div class="tool-list-icon"><img src="assets/icons/shopping.svg" alt=""></div>
+                    <div class="tool-list-text">
+                        <h3 data-i18n="shopping">خرید</h3>
+                        <p data-i18n="desc_shopping">محاسبه هزینه خرید</p>
+                    </div>
+                    <div class="tool-list-arrow"><img src="assets/icons/arrow-left.svg" alt=""></div>
+                </button>
+
+                <button class="tool-list-item" id="toolsDiscount">
+                    <div class="tool-list-icon"><img src="assets/icons/discount.svg" alt=""></div>
+                    <div class="tool-list-text">
+                        <h3 data-i18n="discount">تخفیف</h3>
+                        <p data-i18n="desc_discount">محاسبه درصد و تخفیف</p>
+                    </div>
+                    <div class="tool-list-arrow"><img src="assets/icons/arrow-left.svg" alt=""></div>
+                </button>
+
+                <button class="tool-list-item" id="toolsMeasurement">
+                    <div class="tool-list-icon"><img src="assets/icons/measurement.svg" alt=""></div>
+                    <div class="tool-list-text">
+                        <h3 data-i18n="measurement">اندازه‌گیری</h3>
+                        <p data-i18n="desc_measurement">مساحت، محیط و حجم</p>
+                    </div>
+                    <div class="tool-list-arrow"><img src="assets/icons/arrow-left.svg" alt=""></div>
+                </button>
+
+                <button class="tool-list-item" id="toolsSchool">
+                    <div class="tool-list-icon"><img src="assets/icons/school.svg" alt=""></div>
+                    <div class="tool-list-text">
+                        <h3 data-i18n="school">مسائل مدرسه</h3>
+                        <p data-i18n="desc_school">میانگین، تناسب، سرعت</p>
+                    </div>
+                    <div class="tool-list-arrow"><img src="assets/icons/arrow-left.svg" alt=""></div>
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= صفحه فیلم‌های آموزشی ================= -->
+
+    <section class="videos-page page" id="videosPage">
+
+        <div class="page-header">
+            <h2>آموزش</h2>
+        </div>
+
+        <div class="videos-page-box">
+
+            <div class="videos-page-intro">
+
+                <div class="videos-page-icon"><img class="intro-icon-image" src="assets/icons/video.svg" alt=""></div>
+
+                <h2>فیلم‌های آموزشی</h2>
+
+                <p>
+                    آموزش‌های ریاضی را ببین و بهتر یاد بگیر.
+                </p>
+
+            </div>
+
+            <div class="videos-list">
+
+                <div class="video-card">
+
+                    <div class="video-thumbnail">
+                        
+                    </div>
+
+                    <div class="video-info">
+
+                        <h3>عنوان فیلم آموزشی</h3>
+
+                        <p>
+                            توضیح کوتاهی درباره این آموزش
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="video-card">
+
+                    <div class="video-thumbnail">
+                        
+                    </div>
+
+                    <div class="video-info">
+
+                        <h3>عنوان فیلم آموزشی</h3>
+
+                        <p>
+                            توضیح کوتاهی درباره این آموزش
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="video-card">
+
+                    <div class="video-thumbnail">
+                        
+                    </div>
+
+                    <div class="video-info">
+
+                        <h3>عنوان فیلم آموزشی</h3>
+
+                        <p>
+                            توضیح کوتاهی درباره این آموزش
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= صفحه آواتار ================= -->
+    <section class="page avatar-page" id="avatarPage">
+        <div class="page-header">
+            <button class="back-btn" id="avatarBack"><img class="back-arrow" src="assets/icons/arrow-right.svg" alt=""><span data-i18n="back">بازگشت</span></button>
+            <h2 data-i18n="avatar_title">آواتار</h2>
+        </div>
+        <div class="avatar-box">
+            <div class="avatar-intro">
+                <h2 data-i18n="avatar_heading">انتخاب آواتار</h2>
+                <p data-i18n="avatar_desc">از آواتارهای پیش‌فرض یکی را انتخاب کن یا از دستگاه خودت یک عکس بگذار. عکس کامل با گوشه‌های گرد نمایش داده می‌شود.</p>
+            </div>
+
+            <div class="avatar-preview-wrap">
+                <div class="avatar-preview-circle" id="avatarPreviewCircle">
+                    <img id="avatarPreviewImg" src="assets/avatars/avatar1.png" alt="پیش‌نمایش">
+                </div>
+            </div>
+
+            <div class="avatar-actions">
+                <label class="avatar-upload-btn">
+                    <span data-i18n="avatar_upload">انتخاب از دستگاه</span>
+                    <input type="file" id="avatarFileInput" accept="image/*" hidden>
+                </label>
+                <button type="button" class="calculate-btn" id="avatarSaveBtn" data-i18n="avatar_save">ذخیره آواتار</button>
+            </div>
+
+            <h3 class="avatar-defaults-title" data-i18n="avatar_defaults">آواتارهای پیش‌فرض</h3>
+            <div class="avatar-grid" id="avatarGrid">
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar1.png"><img src="assets/avatars/avatar1.png" alt="1"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar2.png"><img src="assets/avatars/avatar2.png" alt="2"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar3.png"><img src="assets/avatars/avatar3.png" alt="3"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar4.png"><img src="assets/avatars/avatar4.png" alt="4"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar5.png"><img src="assets/avatars/avatar5.png" alt="5"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar6.png"><img src="assets/avatars/avatar6.png" alt="6"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar7.png"><img src="assets/avatars/avatar7.png" alt="7"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar8.png"><img src="assets/avatars/avatar8.png" alt="8"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar9.png"><img src="assets/avatars/avatar9.png" alt="9"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar10.png"><img src="assets/avatars/avatar10.png" alt="10"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar11.png"><img src="assets/avatars/avatar11.png" alt="11"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar12.png"><img src="assets/avatars/avatar12.png" alt="12"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar13.png"><img src="assets/avatars/avatar13.png" alt="13"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar14.png"><img src="assets/avatars/avatar14.png" alt="14"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar15.png"><img src="assets/avatars/avatar15.png" alt="15"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar16.png"><img src="assets/avatars/avatar16.png" alt="16"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar17.png"><img src="assets/avatars/avatar17.png" alt="17"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar18.png"><img src="assets/avatars/avatar18.png" alt="18"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar19.png"><img src="assets/avatars/avatar19.png" alt="19"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar20.png"><img src="assets/avatars/avatar20.png" alt="20"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar21.png"><img src="assets/avatars/avatar21.png" alt="21"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar22.png"><img src="assets/avatars/avatar22.png" alt="22"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar23.png"><img src="assets/avatars/avatar23.png" alt="23"></button>
+                <button type="button" class="avatar-option" data-src="assets/avatars/avatar24.png"><img src="assets/avatars/avatar24.png" alt="24"></button>
+            </div>
+        </div>
+    </section>
+
+<!-- ================= صفحه تنظیمات ================= -->
+
+    <section id="settingsPage" class="page settings-page">
+
+        <div class="page-header">
+            <h1 class="settings-page-title"><img class="settings-title-icon" src="assets/icons/settings.svg" alt=""><span data-i18n="settings">تنظیمات</span></h1>
+        </div>
+
+        <div class="settings-card">
+
+            <h2 data-i18n="font_size_title">اندازه نوشته‌ها</h2>
+
+            <p>
+                <span data-i18n="font_size_desc">اندازه متن‌های برنامه را انتخاب کن.</span>
+            </p>
+
+            <div class="font-size-options">
+
+                <button
+                    class="font-size-btn"
+                    data-size="small" data-i18n="font_small">
+                    کوچک
+                </button>
+
+                <button
+                    class="font-size-btn"
+                    data-size="normal" data-i18n="font_normal">
+                    معمولی
+                </button>
+
+                <button
+                    class="font-size-btn"
+                    data-size="large" data-i18n="font_large">
+                    بزرگ
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="settings-card">
+
+            <h2 data-i18n="appearance_title">ظاهر برنامه</h2>
+
+            <p>
+                <span data-i18n="appearance_desc">حالت روشن یا تاریک را انتخاب کن.</span>
+            </p>
+
+            <div class="theme-options">
+
+                <button
+                    class="theme-option"
+                    data-theme="light" data-i18n="theme_light">
+                     روشن
+                </button>
+
+                <button
+                    class="theme-option"
+                    data-theme="dark" data-i18n="theme_dark">
+                     تاریک
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="settings-card">
+            <h2 data-i18n="color_theme_title">تم رنگی</h2>
+            <p><span data-i18n="color_theme_desc">پالت رنگ برنامه را انتخاب کن.</span></p>
+            <div class="color-theme-options">
+                <button class="color-theme-btn active" data-color-theme="instagram" id="themeInstagram">
+                    <span class="color-theme-swatch instagram"></span>
+                    <span data-i18n="theme_instagram">اینستاگرام</span>
+                </button>
+                <button class="color-theme-btn" data-color-theme="pink-purple" id="themePinkPurple">
+                    <span class="color-theme-swatch pink-purple"></span>
+                    <span data-i18n="theme_pink">صورتی و بنفش</span>
+                </button>
+                <button class="color-theme-btn" data-color-theme="blue-purple" id="themeBluePurple">
+                    <span class="color-theme-swatch blue-purple"></span>
+                    <span data-i18n="theme_blue">آبی و بنفش</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-card">
+            <h2 data-i18n="language_title">زبان</h2>
+            <p data-i18n="language_desc">زبان رابط کاربری را انتخاب کن.</p>
+            <div class="theme-options">
+                <button class="lang-btn active" data-lang="fa" id="langFa">فارسی</button>
+                <button class="lang-btn" data-lang="en" id="langEn">English</button>
+            </div>
+        </div>
+
+        <div class="settings-card">
+            <h2 data-i18n="anim_title">انیمیشن‌ها</h2>
+            <p data-i18n="anim_desc">انیمیشن‌های برنامه را روشن یا خاموش کن.</p>
+            <div class="theme-options">
+                <button class="anim-btn active" data-anim="on" id="animOn" data-i18n="anim_on">روشن</button>
+                <button class="anim-btn" data-anim="off" id="animOff" data-i18n="anim_off">خاموش</button>
+            </div>
+        </div>
+
+        <div class="settings-card">
+
+            <h2 data-i18n="device_title">اطلاعات دستگاه</h2>
+
+            <p class="device-info">
+
+                <span data-i18n="os_label">سیستم عامل</span>
+
+                <strong id="osInfo">
+                    در حال تشخیص...
+                </strong>
+
+            </p>
+
+            <p class="device-info" id="archRow">
+
+                <span data-i18n="arch_label">معماری سیستم</span>
+
+                <strong id="architectureInfo">
+                    در حال تشخیص...
+                </strong>
+
+            </p>
+
+            <p class="device-info">
+
+                <span data-i18n="browser_label">مرورگر</span>
+
+                <strong id="browserInfo">
+                    در حال تشخیص...
+                </strong>
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= صفحه درباره برنامه ================= -->
+
+    <section id="aboutPage" class="page about-page">
+
+        <div class="page-header">
+            <h1 class="about-page-title"><img class="about-title-icon" src="assets/icons/info.svg" alt=""><span data-i18n="about_title">درباره همیار ریاضی</span></h1>
+        </div>
+
+        <div class="about-card">
+
+            <div class="about-icon">
+                <img src="assets/icons/favicon(1).png" alt="MathMate">
+            </div>
+
+            <h2 data-i18n="app_name">همیار ریاضی</h2>
+
+            <p class="version">
+                نسخه 3.0.0
+            </p>
+
+            <p class="about-description">
+                MathMate یک ابزار ساده و کاربردی برای کمک به
+                انجام محاسبات ریاضی و یادگیری بهتر مفاهیم
+                ریاضی است.
+            </p>
+
+        </div>
+
+
+        <div class="about-card">
+
+            <h2>امکانات برنامه</h2>
+
+            <ul class="features-list">
+
+                <li><img src="assets/icons/calculator.svg" alt=""> <span>ماشین حساب</span></li>
+                <li><img src="assets/icons/multiples.svg" alt=""> <span>محاسبه مضرب‌ها</span></li>
+                <li><img src="assets/icons/factors.svg" alt=""> <span>پیدا کردن شمارنده‌ها</span></li>
+                <li><img src="assets/icons/geometry.svg" alt=""> <span>محاسبه مساحت و محیط شکل‌ها</span></li>
+                <li><img src="assets/icons/gcd.svg" alt=""> <span>محاسبه ب.م.م و ک.م.م</span></li>
+                <li><img src="assets/icons/feature-learning.svg" alt=""> <span>جستجوی آموزش‌های ریاضی در آپارات و یوتیوب</span></li>
+                <li><img src="assets/icons/date.svg" alt=""> <span>تبدیل تاریخ شمسی، میلادی و قمری</span></li>
+                <li><img src="assets/icons/unit.svg" alt=""> <span>تبدیل واحدهای طول، وزن، حجم و دما</span></li>
+                <li><img src="assets/icons/time.svg" alt=""> <span>تبدیل واحدهای زمان</span></li>
+                <li><img src="assets/icons/percentage.svg" alt=""> <span>محاسبه درصد</span></li>
+                <li><img src="assets/icons/paint.svg" alt=""> <span>محاسبه رنگ‌آمیزی دیوار</span></li>
+                <li><img src="assets/icons/shopping.svg" alt=""> <span>محاسبه هزینه خرید</span></li>
+                <li><img src="assets/icons/discount.svg" alt=""> <span>محاسبه تخفیف</span></li>
+                <li><img src="assets/icons/solution.svg" alt=""> <span>مسائل مدرسه با راه‌حل گام‌به‌گام</span></li>
+                <li><img src="assets/icons/sun.svg" alt=""> <span>حالت روشن و تاریک</span></li>
+                <li><img src="assets/icons/text-size.svg" alt=""> <span>تنظیم اندازه نوشته‌ها</span></li>
+                <li><img src="assets/icons/storage.svg" alt=""> <span>ذخیره تنظیمات با LocalStorage</span></li>
+                <li><img src="assets/icons/browser.svg" alt=""> <span>نمایش اطلاعات دستگاه و مرورگر</span></li>
+                <li><img src="assets/icons/navigation.svg" alt=""> <span>سایدبار و نوار ناوبری</span></li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="about-card">
+
+            <h2 class="version-heading"><img src="assets/icons/info.svg" alt="">درباره نسخه</h2>
+
+            <p class="about-description">
+                نسخه 3.0.0 یک نسخه جدیدتر و کامل‌تر از
+                نسخه‌های اولیه MathMate است و با ظاهر بهتر،
+                ابزارهای بیشتر و تنظیمات شخصی‌سازی ساخته شده.
+            </p>
+
+        </div>
+
+
+        <div class="about-footer">
+            <span data-i18n="footer">ساخته شده با ❤ و JavaScript توسط حسین ثقفی</span>
+        </div>
+
+    </section>
+
+
+    <!-- ================= صفحه اصلی ================= -->
+
+    <header class="header">
+
+        <div class="profile">
+
+            <div class="profile-icon"><img src="assets/icons/favicon(1).png" alt="" width="28" height="28" style="border-radius:8px"></div>
+
+            <div>
+
+                <p class="hello">
+                    <span data-i18n="hello">سلام!</span> 
+                </p>
+
+                <h1><span data-i18n="welcome_title">به همیار ریاضی خوش اومدی</span></h1>
+
+            </div>
+
+        </div>
+
+        <button
+            class="theme-btn"
+            id="themeBtn"
+            aria-label="تغییر حالت"
+        ><img class="theme-icon" src="assets/icons/moon.svg" alt="">
+        </button>
+
+    </header>
+
+
+    <!-- ================= کارت معرفی ================= -->
+
+    <section class="welcome-card">
+
+        <div class="welcome-text">
+
+            <span class="badge">
+                <span data-i18n="badge_ready">آماده یادگیری؟</span> 
+            </span>
+
+            <h2><span data-i18n="hero_line1">ریاضی رو راحت‌تر</span>
+                <br>
+                <span data-i18n="hero_line2">و جذاب‌تر یاد بگیر!</span></h2>
+
+            <p>
+                <span data-i18n="hero_desc">ابزارهای کاربردی ریاضی، ماشین حساب و آموزش، همه در یک جا.</span>
+            </p>
+
+            <button class="start-btn">
+                <span data-i18n="start_btn">شروع کنیم</span>
+                <span class="start-arrow"><img src="assets/icons/arrow-left.svg" alt=""></span>
+            </button>
+
+        </div>
+
+        <div class="welcome-illustration"><img src="assets/icons/hero.svg" alt=""></div>
+
+    </section>
+
+
+    <!-- ================= عنوان ابزارها ================= -->
+
+    <section class="tools-section">
+
+        <div class="section-header">
+
+            <h2><span data-i18n="tools_page_title">ابزارهای همیار ریاضی</span></h2>
+
+            <button
+                class="more-btn"
+                id="moreToolsBtn"
+            >
+                <span data-i18n="all_tools">همه ابزارها</span> 
+            </button>
+
+        </div>
+
+
+        <div class="tools-grid">
+
+            <button class="tool-card calculator" id="calculatorCard">
+                <div class="tool-icon"><img src="assets/icons/calculator.svg" alt=""></div>
+                <h3 data-i18n="calc">ماشین حساب</h3>
+                <p data-i18n="desc_calc">محاسبات سریع و آسان</p>
+            </button>
+
+            <button class="tool-card geometry" id="geometryCard">
+                <div class="tool-icon"><img src="assets/icons/geometry.svg" alt=""></div>
+                <h3 data-i18n="geometry">مساحت و محیط</h3>
+                <p data-i18n="desc_geometry">محاسبه شکل‌های هندسی</p>
+            </button>
+
+            <button class="tool-card numbers" id="gcdLcmCard">
+                <div class="tool-icon"><img src="assets/icons/gcd.svg" alt=""></div>
+                <h3 data-i18n="gcd_lcm">ب.م.م و ک.م.م</h3>
+                <p data-i18n="desc_gcd">محاسبه سریع اعداد</p>
+            </button>
+
+            <button class="tool-card multiples" id="multiplesCard">
+                <div class="tool-icon"><img src="assets/icons/multiples.svg" alt=""></div>
+                <h3 data-i18n="multiples">مضرب‌ها</h3>
+                <p data-i18n="desc_multiples_short">پیدا کردن مضرب‌ها</p>
+            </button>
+
+            <button class="tool-card learning" id="learningCard">
+                <div class="tool-icon"><img src="assets/icons/learning.svg" alt=""></div>
+                <h3 data-i18n="learning">آموزش</h3>
+                <p data-i18n="desc_learning_short">یادگیری آنلاین</p>
+            </button>
+
+            <button class="tool-card counter" id="factorsCard">
+                <div class="tool-icon"><img src="assets/icons/factors.svg" alt=""></div>
+                <h3 data-i18n="factors">شمارنده‌ها</h3>
+                <p data-i18n="desc_factors_short">پیدا کردن شمارنده‌ها</p>
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= بخش ادامه یادگیری ================= -->
+
+    <section class="learning-card">
+
+        <div class="learning-icon"><img src="assets/icons/learning-start.svg" alt=""></div>
+
+        <div
+            class="learning-text"
+            id="startLearningCard"
+        >
+
+            <h2><span data-i18n="ready_start">آماده‌ای شروع کنی؟</span></h2>
+
+            <p>
+                <span data-i18n="pick_tool">یک ابزار انتخاب کن و شروع کن!</span>
+            </p>
+
+        </div>
+
+        <span class="learning-arrow"><img src="assets/icons/arrow-left.svg" alt=""></span>
+
+    </section>
+
+
+
+
+
+</div>
+
+
+<script src="script.js"></script>
+
+<!-- Sidebar safety wiring: restores only the requested Sidebar open/close behavior. -->
+<script>
+(() => {
+    const sidebar = document.getElementById("sidebar");
+    const toggle = document.getElementById("sidebarToggle");
+    const close = document.getElementById("sidebarClose");
+    const overlay = document.getElementById("sidebarOverlay");
+    if (!sidebar || !toggle || !close) return;
+
+    const isMobile = () => window.matchMedia("(max-width: 899px)").matches;
+
+    const openSidebarSafely = () => {
+        sidebar.classList.remove("is-closing");
+        sidebar.classList.add("open");
+        document.body.classList.add("sidebar-open");
+        if (isMobile() && overlay) overlay.classList.add("show");
+        toggle.style.display = "none";
+    };
+
+    const closeSidebarSafely = () => {
+        sidebar.classList.remove("is-closing");
+        sidebar.classList.remove("open");
+        document.body.classList.remove("sidebar-open");
+        if (overlay) overlay.classList.remove("show");
+        toggle.style.display = "";
+    };
+
+    /* Capture phase prevents an older bubble listener from immediately undoing the open. */
+    toggle.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        openSidebarSafely();
+    }, true);
+
+    close.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        closeSidebarSafely();
+    }, true);
+
+    if (overlay) {
+        overlay.addEventListener("click", (event) => {
+            if (!isMobile()) return;
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            closeSidebarSafely();
+        }, true);
+    }
+})();
+</script>
+
+
+</body>
+
+<!-- Mirrored from https://mathmate-web.vercel.app/ by HTTrack Website Copier/3.x [XR&CO], Sat, 10 Oct 2026 19:27:06 GMT -->
+</html>

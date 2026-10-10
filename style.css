@@ -1,0 +1,5967 @@
+@font-face {
+    font-family: "Arad";
+    src: url("assets/fonts/AradVF.ttf") format("truetype");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Windows 11 style thin rounded scrollbar */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(120, 120, 120, 0.4) transparent;
+}
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(120, 120, 120, 0.35);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(120, 120, 120, 0.55);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+body.dark ::-webkit-scrollbar-thumb {
+    background: rgba(180, 180, 180, 0.3);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+body.dark ::-webkit-scrollbar-thumb:hover {
+    background: rgba(180, 180, 180, 0.5);
+}
+
+:root {
+    /* Default color theme: Instagram */
+    --primary: #E1306C;
+    --primary-dark: #C13584;
+    --primary-color: #E1306C;
+    --primary-light: rgba(225, 48, 108, 0.14);
+    --accent-purple: #833AB4;
+    --accent-orange: #F77737;
+    --accent-yellow: #FCAF45;
+    --accent-blue: #405DE6;
+    --gradient-hero: linear-gradient(135deg, #E1306C, #833AB4, #F77737);
+
+    --background: #F3F4F6;
+    --card: rgba(255, 255, 255, 0.72);
+    --card-bg: rgba(255, 255, 255, 0.72);
+
+    --text: #1F2937;
+    --text-light: #6B7280;
+    --border: rgba(0, 0, 0, 0.06);
+
+    --input-bg: rgba(255, 255, 255, 0.55);
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+
+    --sidebar-width: 280px;
+    --sidebar-bg: rgba(255, 255, 255, 0.65);
+    --sidebar-border: rgba(0, 0, 0, 0.06);
+    --acrylic: blur(40px) saturate(180%);
+
+    --anim-duration: 0.3s;
+    --anim-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Color themes (independent of dark/light) */
+body.theme-instagram {
+    --primary: #E1306C;
+    --primary-dark: #C13584;
+    --primary-color: #E1306C;
+    --primary-light: rgba(225, 48, 108, 0.14);
+    --accent-purple: #833AB4;
+    --accent-orange: #F77737;
+    --accent-yellow: #FCAF45;
+    --accent-blue: #405DE6;
+    --gradient-hero: linear-gradient(135deg, #FCAF45, #F77737, #E1306C, #833AB4, #405DE6);
+}
+
+body.theme-pink-purple {
+    --primary: #D946EF;
+    --primary-dark: #A21CAF;
+    --primary-color: #D946EF;
+    --primary-light: rgba(217, 70, 239, 0.14);
+    --accent-purple: #7C3AED;
+    --accent-orange: #EC4899;
+    --accent-yellow: #F472B6;
+    --accent-blue: #A78BFA;
+    --gradient-hero: linear-gradient(135deg, #EC4899, #D946EF, #7C3AED);
+}
+
+body.theme-blue-purple {
+    --primary: #6366F1;
+    --primary-dark: #4F46E5;
+    --primary-color: #6366F1;
+    --primary-light: rgba(99, 102, 241, 0.14);
+    --accent-purple: #8B5CF6;
+    --accent-orange: #818CF8;
+    --accent-yellow: #A5B4FC;
+    --accent-blue: #3B82F6;
+    --gradient-hero: linear-gradient(135deg, #3B82F6, #6366F1, #8B5CF6);
+}
+
+body.dark {
+    --background: #0B0B0F;
+    --card: rgba(30, 30, 40, 0.65);
+    --card-bg: rgba(30, 30, 40, 0.65);
+
+    --text: #F3F4F6;
+    --text-light: #9CA3AF;
+    --border: rgba(255, 255, 255, 0.08);
+
+    --input-bg: rgba(255, 255, 255, 0.06);
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+
+    --sidebar-bg: rgba(20, 20, 28, 0.72);
+    --sidebar-border: rgba(255, 255, 255, 0.08);
+}
+
+/* Disable animations when user turns them off */
+body.no-animations,
+body.no-animations * {
+    transition: none !important;
+    animation: none !important;
+}
+
+body {
+    font-family: "Arad", sans-serif;
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Tap highlight removal for mobile */
+button, a, input, select, textarea, .tool-card, .nav-item, .sidebar-item {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.app {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-bottom: 40px;
+    transition: margin var(--anim-duration) var(--anim-ease),
+                max-width var(--anim-duration) var(--anim-ease),
+                transform var(--anim-duration) var(--anim-ease);
+}
+
+/* ================= SIDEBAR (Right - RTL) ================= */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--sidebar-bg);
+    backdrop-filter: var(--acrylic);
+    -webkit-backdrop-filter: var(--acrylic);
+    border-left: 1px solid var(--sidebar-border);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 10px;
+    transform: translateX(0);
+    transition: transform var(--anim-duration) var(--anim-ease);
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.08);
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.sidebar-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(225, 48, 108, 0.25);
+}
+
+.sidebar-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sidebar-title {
+    font-size: 18px;
+    font-weight: 700;
+    flex: 1;
+}
+
+.sidebar-close {
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    transition: transform 0.35s var(--anim-ease), background 0.2s;
+}
+
+.sidebar-close:hover {
+    background: rgba(0, 0, 0, 0.06);
+    transform: rotate(90deg);
+}
+
+body.dark .sidebar-close:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-close svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+}
+
+.sidebar-nav {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-bottom: 20px;
+}
+
+.sidebar-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border: none;
+    background: transparent;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background var(--anim-duration) var(--anim-ease),
+                color var(--anim-duration) var(--anim-ease);
+    text-align: right;
+    width: 100%;
+}
+
+.sidebar-item:hover {
+    background: var(--primary-light);
+}
+
+.sidebar-item.active {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    font-weight: 600;
+}
+
+body.dark .sidebar-item.active {
+    color: #F77737;
+}
+
+/* Active Marker - animated vertical bar */
+.sidebar-item .active-marker {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 3.5px;
+    height: 0;
+    background: linear-gradient(180deg, var(--primary), var(--accent-purple));
+    border-radius: 999px;
+    transform: translateY(-50%);
+    transition: height 0.25s var(--anim-ease), opacity 0.25s;
+    opacity: 0;
+}
+
+.sidebar-item.active .active-marker {
+    height: 22px;
+    opacity: 1;
+}
+
+.sidebar-item svg,
+.sidebar-item img.icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.sidebar-item .chevron {
+    margin-right: auto;
+    margin-left: 0;
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s var(--anim-ease);
+}
+
+.sidebar-item.expanded .chevron {
+    transform: rotate(180deg);
+}
+
+/* Submenu (Real World tools) */
+.sidebar-submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s var(--anim-ease);
+    padding-right: 8px;
+}
+
+.sidebar-submenu.open {
+    max-height: 320px;
+}
+
+.sidebar-submenu .sidebar-item {
+    padding: 10px 14px 10px 12px;
+    font-size: 13px;
+}
+
+.sidebar-section-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-light);
+    padding: 14px 14px 6px;
+    letter-spacing: 0.3px;
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1999;
+    opacity: 0;
+    transition: opacity var(--anim-duration) var(--anim-ease);
+}
+
+.sidebar-overlay.show {
+    display: block;
+    opacity: 1;
+}
+
+.sidebar-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 2001;
+    width: 46px;
+    height: 46px;
+    border: none;
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: var(--card-shadow);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.sidebar-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.sidebar-toggle svg {
+    width: 22px;
+    height: 22px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+}
+
+/* (removed old desktop always-open rules — see Win11 collapsible block) */
+
+
+/* Mobile: collapsible sidebar */
+@media (max-width: 899px) {
+    .sidebar {
+        width: min(85vw, 300px);
+        transform: translateX(100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    body.sidebar-open {
+        overflow: hidden;
+    }
+
+    body.sidebar-open .sidebar-toggle {
+        display: none !important;
+    }
+
+    .sidebar-toggle {
+        display: flex;
+    }
+}
+
+/* Page enter animation */
+.page {
+    display: none;
+    opacity: 0;
+    transform: translateY(12px);
+}
+
+.page.show {
+    display: block;
+    animation: pageIn 0.32s var(--anim-ease) forwards;
+}
+
+@keyframes pageIn {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body.no-animations .page.show {
+    animation: none;
+    opacity: 1;
+    transform: none;
+}
+
+/* ================= HEADER ================= */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-icon {
+    width: 55px;
+    height: 55px;
+    background: linear-gradient(135deg, #E1306C, #833AB4);
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+
+    box-shadow: 0 8px 20px rgba(20, 184, 166, 0.25);
+}
+
+.hello {
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.profile h1 {
+    font-size: 19px;
+    margin-top: 3px;
+}
+
+.theme-btn {
+    width: 48px;
+    height: 48px;
+
+    border: none;
+    background: var(--card);
+    border-radius: 16px;
+
+    font-size: 21px;
+    cursor: pointer;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+}
+
+/* ================= WELCOME CARD ================= */
+
+.welcome-card {
+    min-height: 240px;
+
+    background: var(--gradient-hero);
+
+    border-radius: 28px;
+    padding: 28px;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+    overflow: hidden;
+
+    margin-bottom: 35px;
+
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.welcome-card::before {
+    content: "";
+    position: absolute;
+
+    width: 200px;
+    height: 200px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    left: -70px;
+    bottom: -100px;
+}
+
+.welcome-text {
+    position: relative;
+    z-index: 1;
+}
+
+.badge {
+    display: inline-block;
+
+    background: rgba(255, 255, 255, 0.18);
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    margin-bottom: 15px;
+}
+
+.welcome-card h2 {
+    font-size: 25px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.welcome-card p {
+    font-size: 13px;
+    line-height: 1.8;
+    opacity: 0.9;
+    max-width: 300px;
+}
+
+.start-btn {
+    margin-top: 20px;
+
+    border: none;
+    background: white;
+    color: var(--primary-dark);
+
+    padding: 12px 18px;
+
+    border-radius: 15px;
+
+    font-family: inherit;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.start-btn:hover {
+    transform: translateY(-2px);
+}
+
+.welcome-illustration {
+    font-size: 85px;
+
+    position: relative;
+    z-index: 1;
+
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* ================= TOOLS ================= */
+
+.tools-section {
+    margin-bottom: 30px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.section-header h2 {
+    font-size: 20px;
+}
+
+.more-btn {
+    border: none;
+    background: transparent;
+
+    color: var(--primary-dark);
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+.tools-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+.tool-card {
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 22px;
+
+    padding: 20px;
+
+    text-align: right;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.04);
+}
+
+.tool-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+}
+
+.tool-icon {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+
+    margin-bottom: 15px;
+}
+
+.calculator .tool-icon {
+    background: #DCFCE7;
+}
+
+.geometry .tool-icon {
+    background: #DBEAFE;
+}
+
+.numbers .tool-icon {
+    background: #F3E8FF;
+}
+
+.multiples .tool-icon {
+    background: #FEF3C7;
+}
+
+.learning .tool-icon {
+    background: #FCE7F3;
+}
+
+.counter .tool-icon {
+    background: #E0F2FE;
+}
+
+.tool-card h3 {
+    font-size: 15px;
+
+    margin-bottom: 6px;
+
+    color: var(--text);
+}
+
+.tool-card p {
+    font-size: 12px;
+
+    color: var(--text-light);
+}
+
+/* ================= LEARNING CARD ================= */
+
+.learning-card {
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 22px;
+
+    padding: 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.learning-icon {
+    width: 55px;
+    height: 55px;
+
+    border-radius: 18px;
+
+    background: #FEF3C7;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+}
+
+.learning-text {
+    flex: 1;
+}
+
+.learning-text h2 {
+    font-size: 16px;
+
+    margin-bottom: 4px;
+}
+
+.learning-text p {
+    font-size: 12px;
+
+    color: var(--text-light);
+}
+
+.learning-arrow {
+    font-size: 24px;
+
+    color: var(--primary);
+}
+
+/* ================= BOTTOM NAV ================= */
+
+.bottom-nav {
+    display: none !important;
+}
+
+.nav-item {
+    border: none;
+
+    background: transparent;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 4px;
+
+    font-family: inherit;
+
+    color: var(--text-light);
+
+    cursor: pointer;
+
+    padding: 5px 15px;
+
+    border-radius: 15px;
+
+    transition: 0.2s;
+}
+
+.nav-item span {
+    font-size: 20px;
+}
+
+.nav-item small {
+    font-size: 11px;
+}
+
+.nav-item.active {
+    color: var(--primary-dark);
+
+    background: rgba(225,48,108,0.12);
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark {
+    --background: #0F172A;
+    --card: #1E293B;
+    --text: #F8FAFC;
+    --text-light: #94A3B8;
+    --border: #334155;
+}
+
+body.dark .bottom-nav {
+    background: rgba(30, 41, 59, 0.95);
+}
+
+body.dark .tool-card {
+    background: var(--card);
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 500px) {
+
+    .app {
+        padding: 15px;
+        padding-bottom: 90px;
+    }
+
+    .welcome-card {
+        min-height: 220px;
+        padding: 22px;
+    }
+
+    .welcome-card h2 {
+        font-size: 21px;
+    }
+
+    .welcome-illustration {
+        font-size: 65px;
+    }
+
+    .tool-card {
+        padding: 16px;
+    }
+
+    .profile h1 {
+        font-size: 16px;
+    }
+}
+
+/* ================= DESKTOP ================= */
+
+@media (min-width: 768px) {
+
+    .app {
+        max-width: none;
+        width: 100%;
+        padding: 35px 7%;
+        padding-bottom: 100px;
+    }
+
+    .tools-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .welcome-card {
+        min-height: 280px;
+    }
+
+    .bottom-nav {
+        max-width: none;
+        backdrop-filter: blur(5px);
+        border-radius: 15px;
+        margin: 5px;
+    }
+}
+/* ================= CALCULATOR PAGE ================= */
+
+.calculator-page {
+    display: none;
+}
+
+.calculator-page.show {
+    display: block;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+}
+
+.page-header h2 {
+    font-size: 24px;
+}
+
+.back-btn {
+    border: none;
+    background: var(--card);
+    color: var(--text);
+
+    padding: 12px 18px;
+
+    border-radius: 14px;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    border: 1px solid var(--border);
+
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    transform: translateY(-2px);
+}
+
+.calculator-box {
+    width: 100%;
+    max-width: 520px;
+
+    margin: 0 auto;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 30px;
+
+    padding: 20px;
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.calculator-display {
+    min-height: 120px;
+
+    background: var(--background);
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+
+    direction: ltr;
+
+    font-size: 40px;
+    font-weight: 700;
+
+    overflow-x: auto;
+
+    margin-bottom: 20px;
+}
+
+.calculator-buttons {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 12px;
+}
+
+.calc-btn {
+    border: none;
+
+    min-height: 65px;
+
+    background: var(--background);
+    color: var(--text);
+
+    border-radius: 18px;
+
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.calc-btn:hover {
+    transform: scale(1.04);
+}
+
+.calc-btn:active {
+    transform: scale(0.96);
+}
+
+.calc-btn.operator {
+    background: rgba(225,48,108,0.12);
+    color: var(--primary-dark);
+}
+
+.calc-btn.equals {
+    background: var(--primary);
+    color: white;
+}
+
+.calc-btn.zero {
+    grid-column: span 2;
+}
+
+/* ================= MULTIPLES PAGE ================= */
+
+.multiples-page {
+    display: none;
+}
+
+.multiples-page.show {
+    display: block;
+}
+
+.multiples-box {
+    width: 100%;
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 30px;
+
+    padding: 30px;
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.multiples-intro {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.multiples-icon {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 15px;
+
+    background: #FEF3C7;
+
+    border-radius: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+}
+
+.multiples-intro h2 {
+    font-size: 23px;
+
+    margin-bottom: 8px;
+}
+
+.multiples-intro p {
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 16px;
+
+    border: 1px solid var(--border);
+
+    background: var(--background);
+    color: var(--text);
+
+    font-family: inherit;
+    font-size: 16px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+.input-group input:focus {
+    border-color: var(--primary);
+
+    box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.1);
+}
+
+.calculate-multiples-btn {
+    width: 100%;
+
+    border: none;
+
+    padding: 16px;
+
+    border-radius: 17px;
+
+    background: var(--primary);
+    color: white;
+
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    margin-top: 5px;
+}
+
+.calculate-multiples-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 20px rgba(20, 184, 166, 0.25);
+}
+
+
+/* نتیجه */
+
+.multiples-result {
+    display: none;
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    background: var(--background);
+
+    border-radius: 20px;
+}
+
+.multiples-result.show {
+    display: block;
+}
+
+.multiples-result h3 {
+    font-size: 17px;
+
+    margin-bottom: 15px;
+}
+
+.multiples-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.multiple-item {
+    background: #FEF3C7;
+
+    color: #92400E;
+
+    padding: 9px 14px;
+
+    border-radius: 12px;
+
+    font-weight: 600;
+}
+
+
+/* موبایل */
+
+@media (max-width: 500px) {
+
+    .multiples-box {
+        padding: 20px;
+
+        border-radius: 25px;
+    }
+
+    .multiples-intro h2 {
+        font-size: 20px;
+    }
+}
+
+/* ================= GEOMETRY PAGE ================= */
+
+.geometry-page {
+    display: none;
+}
+
+.geometry-page.show {
+    display: block;
+}
+
+.geometry-box {
+    width: 100%;
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 30px;
+
+    padding: 30px;
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+
+/* معرفی */
+
+.geometry-intro {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.geometry-icon {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 15px;
+
+    background: #DBEAFE;
+
+    border-radius: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+}
+
+.geometry-intro h2 {
+    font-size: 23px;
+
+    margin-bottom: 8px;
+}
+
+.geometry-intro p {
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+
+/* انتخاب شکل */
+
+.shape-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+.shape-card {
+    border: 2px solid var(--border);
+
+    background: var(--background);
+    color: var(--text);
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    font-family: inherit;
+    font-size: 32px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.shape-card span {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.shape-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #60A5FA;
+}
+
+.shape-card.active {
+    border-color: #3B82F6;
+
+    background: #EFF6FF;
+
+    color: #2563EB;
+}
+
+
+/* ورودی‌ها */
+
+.geometry-inputs {
+    margin-bottom: 20px;
+}
+
+.geometry-input {
+    margin-bottom: 15px;
+}
+
+.geometry-input label {
+    display: block;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+.geometry-input input {
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 16px;
+
+    border: 1px solid var(--border);
+
+    background: var(--background);
+    color: var(--text);
+
+    font-family: inherit;
+    font-size: 16px;
+
+    outline: none;
+}
+
+.geometry-input input:focus {
+    border-color: #3B82F6;
+
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+
+/* دکمه محاسبه */
+
+.calculate-geometry-btn {
+    width: 100%;
+
+    border: none;
+
+    padding: 16px;
+
+    border-radius: 17px;
+
+    background: var(--primary);
+
+    color: white;
+
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.calculate-geometry-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.25);
+}
+
+
+/* نتیجه */
+
+.geometry-result {
+    display: none;
+
+    margin-top: 25px;
+
+    background: var(--background);
+
+    border-radius: 20px;
+
+    padding: 20px;
+}
+
+.geometry-result.show {
+    display: block;
+}
+
+.result-row {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.result-row:last-child {
+    border-bottom: none;
+}
+
+.result-row span {
+    color: var(--text-light);
+}
+
+.result-row strong {
+    font-size: 18px;
+
+    color: #2563EB;
+}
+
+
+/* موبایل */
+
+@media (max-width: 500px) {
+
+    .geometry-box {
+        padding: 20px;
+
+        border-radius: 25px;
+    }
+
+    .geometry-intro h2 {
+        font-size: 20px;
+    }
+
+    .shape-card {
+        padding: 15px;
+
+        font-size: 28px;
+    }
+}
+
+/* ================= GCD & LCM PAGE ================= */
+
+.gcd-lcm-page {
+    display: none;
+}
+
+.gcd-lcm-page.show {
+    display: block;
+}
+
+.gcd-lcm-box {
+    width: 100%;
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 30px;
+
+    padding: 30px;
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+
+/* معرفی */
+
+.gcd-lcm-intro {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.gcd-lcm-icon {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 15px;
+
+    background: #EDE9FE;
+
+    border-radius: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+}
+
+.gcd-lcm-intro h2 {
+    font-size: 23px;
+
+    margin-bottom: 8px;
+}
+
+.gcd-lcm-intro p {
+    color: var(--text-light);
+
+    font-size: 14px;
+}
+
+
+/* دکمه محاسبه */
+
+.calculate-gcd-lcm-btn {
+    width: 100%;
+
+    border: none;
+
+    padding: 16px;
+
+    border-radius: 17px;
+
+    background: var(--accent-purple);
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.calculate-gcd-lcm-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 20px rgba(139, 92, 246, 0.25);
+}
+
+
+/* نتیجه */
+
+.gcd-lcm-result {
+    display: none;
+
+    margin-top: 25px;
+
+    background: var(--background);
+
+    border-radius: 20px;
+
+    padding: 20px;
+}
+
+.gcd-lcm-result.show {
+    display: block;
+}
+
+
+/* موبایل */
+
+@media (max-width: 500px) {
+
+    .gcd-lcm-box {
+        padding: 20px;
+
+        border-radius: 25px;
+    }
+
+    .gcd-lcm-intro h2 {
+        font-size: 20px;
+    }
+}
+
+/* ================= LEARNING PAGE ================= */
+
+.learning-page {
+    display: none;
+}
+
+.learning-page.show {
+    display: block;
+}
+
+.learning-box {
+    width: 100%;
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 30px;
+
+    padding: 30px;
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+
+/* معرفی صفحه */
+
+.learning-page-intro {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.learning-page-icon {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 15px;
+
+    background: #FCE7F3;
+
+    border-radius: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+}
+
+.learning-page-intro h2 {
+    font-size: 23px;
+
+    margin-bottom: 8px;
+}
+
+.learning-page-intro p {
+    color: var(--text-light);
+
+    font-size: 14px;
+}
+
+
+/* دکمه‌های جستجو */
+
+.learning-search-buttons {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-top: 10px;
+}
+
+.search-video-btn {
+    border: none;
+
+    padding: 16px 10px;
+
+    border-radius: 17px;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+/* آپارات */
+
+.aparat-btn {
+    background: #ED145B;
+}
+
+
+/* یوتیوب */
+
+.youtube-btn {
+    background: #FF0000;
+}
+
+
+.search-video-btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.search-video-btn:active {
+    transform: scale(0.97);
+}
+
+
+/* موبایل */
+
+@media (max-width: 500px) {
+
+    .learning-box {
+        padding: 20px;
+
+        border-radius: 25px;
+    }
+
+    .learning-page-intro h2 {
+        font-size: 20px;
+    }
+
+    .learning-search-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .search-video-btn {
+        padding: 15px;
+    }
+
+}
+
+/* ================= FACTORS PAGE ================= */
+
+.factors-page {
+    display: none;
+}
+
+.factors-page.show {
+    display: block;
+}
+
+.factors-box {
+    width: 100%;
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 30px;
+
+    padding: 30px;
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+
+/* معرفی */
+
+.factors-intro {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.factors-icon {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 15px;
+
+    background: #E0F2FE;
+
+    border-radius: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+}
+
+.factors-intro h2 {
+    font-size: 23px;
+
+    margin-bottom: 8px;
+}
+
+.factors-intro p {
+    color: var(--text-light);
+
+    font-size: 14px;
+}
+
+
+/* دکمه محاسبه */
+
+.calculate-factors-btn {
+    width: 100%;
+
+    border: none;
+
+    padding: 16px;
+
+    border-radius: 17px;
+
+    background: #0EA5E9;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.calculate-factors-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 20px rgba(14, 165, 233, 0.25);
+}
+
+
+/* نتیجه */
+
+.factors-result {
+    display: none;
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    background: var(--background);
+
+    border-radius: 20px;
+}
+
+.factors-result.show {
+    display: block;
+}
+
+.factors-result h3 {
+    font-size: 17px;
+
+    margin-bottom: 15px;
+}
+
+
+/* لیست شمارنده‌ها */
+
+.factors-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.factor-item {
+    background: #E0F2FE;
+
+    color: #0369A1;
+
+    padding: 9px 14px;
+
+    border-radius: 12px;
+
+    font-weight: 600;
+}
+
+
+/* موبایل */
+
+@media (max-width: 500px) {
+
+    .factors-box {
+        padding: 20px;
+
+        border-radius: 25px;
+    }
+
+    .factors-intro h2 {
+        font-size: 20px;
+    }
+
+}
+
+/* ================= TOOLS PAGE ================= */
+
+.tools-page {
+    display: none;
+}
+
+.tools-page.show {
+    display: block;
+    padding-bottom: 100px;
+}
+
+
+.tools-page-box {
+    width: 100%;
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 30px;
+
+    padding: 30px;
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+
+/* معرفی */
+
+.tools-page-intro {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.tools-page-icon {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 15px;
+
+    background: #E0F2FE;
+
+    border-radius: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+}
+
+.tools-page-intro h2 {
+    font-size: 23px;
+
+    margin-bottom: 8px;
+}
+
+.tools-page-intro p {
+    color: var(--text-light);
+
+    font-size: 14px;
+}
+
+
+/* لیست ابزارها */
+
+.tools-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+/* کارت هر ابزار */
+
+.tool-list-item {
+    width: 100%;
+    height: 87px;
+
+    border: 1px solid var(--border);
+
+    background: var(--background);
+
+    color: var(--text);
+
+    border-radius: 20px;
+
+    padding: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    font-family: inherit;
+
+    text-align: right;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.tool-list-item:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.07);
+}
+
+
+/* آیکون */
+
+.tool-list-icon {
+    width: 55px;
+    height: 55px;
+
+    flex-shrink: 0;
+
+    border-radius: 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 27px;
+}
+
+
+/* رنگ آیکون‌ها */
+
+.calculator-icon {
+    background: #DCFCE7;
+}
+
+.geometry-icon {
+    background: #DBEAFE;
+}
+
+.gcd-icon {
+    background: #EDE9FE;
+}
+
+.multiples-icon {
+    background: #FEF3C7;
+}
+
+.factors-icon {
+    background: #E0F2FE;
+}
+
+.learning-icon {
+    background: #FCE7F3;
+}
+
+.date-icon {
+    background: #E0F2FE;
+}
+
+.unit-icon {
+    background: #a9e0ff;
+}
+
+.percentage-ico {
+    background: #c7ffb9;
+    color: #334155;
+}
+
+.time-icon {
+    background: #E0F2FE;
+}
+
+/* متن */
+
+.tool-list-text {
+    flex: 1;
+}
+
+.tool-list-text h3 {
+    font-size: 15px;
+
+    margin-bottom: 5px;
+}
+
+.tool-list-text p {
+    font-size: 12px;
+
+    color: var(--text-light);
+}
+
+
+
+/* فلش */
+
+.tool-list-arrow {
+    font-size: 22px;
+
+    color: var(--primary);
+
+    padding-left: 5px;
+}
+
+
+/* موبایل */
+
+@media (max-width: 500px) {
+
+    .tools-page-box {
+        padding: 20px;
+
+        border-radius: 25px;
+    }
+
+    .tools-page-intro h2 {
+        font-size: 20px;
+    }
+
+    .tool-list-item {
+        height: 81px;
+        padding: 13px;
+    }
+
+}
+
+/* ================= صفحه فیلم‌های آموزشی ================= */
+
+.videos-page {
+    display: none;
+    padding-bottom: 100px;
+}
+
+.videos-page.show {
+    display: block;
+}
+
+
+/* جعبه اصلی */
+
+.videos-page-box {
+    padding: 20px;
+}
+
+
+/* بخش معرفی */
+
+.videos-page-intro {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.videos-page-icon {
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+
+.videos-page-intro h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.videos-page-intro p {
+    opacity: 0.7;
+    line-height: 1.8;
+}
+
+
+/* لیست فیلم‌ها */
+
+.videos-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+/* کارت فیلم */
+
+.video-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+
+    transition: transform 0.2s ease;
+}
+
+.video-card:hover {
+    transform: translateY(-3px);
+}
+
+
+/* جای تصویر فیلم */
+
+.video-thumbnail {
+    height: 180px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 50px;
+
+    background: rgba(100, 100, 100, 0.15);
+}
+
+
+/* اطلاعات فیلم */
+
+.video-info {
+    padding: 15px;
+}
+
+.video-info h3 {
+    margin-bottom: 7px;
+    font-size: 18px;
+}
+
+.video-info p {
+    opacity: 0.7;
+    line-height: 1.7;
+}
+
+/* ================= لایه به‌زودی ================= */
+
+.coming-soon-overlay {
+    position: fixed;
+
+    top: 0;
+    right: 0;
+    left: 0;
+
+    /* لایه فقط تا بالای نوار پایین می‌آید */
+    bottom: 75px;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    backdrop-filter: blur(6px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 999;
+}
+
+
+/* ================= کارت بزرگ وسط صفحه ================= */
+
+.coming-soon-card {
+    width: calc(100% - 40px);
+    max-width: 500px;
+
+    min-height: 320px;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 30px;
+
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+}
+
+
+/* آیکون */
+
+.coming-soon-icon {
+    font-size: 70px;
+
+    margin-bottom: 15px;
+}
+
+
+/* عنوان */
+
+.coming-soon-card h2 {
+    font-size: 32px;
+
+    margin-bottom: 10px;
+}
+
+
+/* متن */
+
+.coming-soon-card p {
+    font-size: 16px;
+
+    color: var(--text-light);
+
+    line-height: 1.8;
+
+    max-width: 350px;
+}
+
+/* ===============================
+   SETTINGS & ABOUT PAGES FIX
+================================ */
+
+/* تمام صفحه‌های جداگانه */
+.page {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    padding: 25px 20px 100px;
+    box-sizing: border-box;
+}
+
+/* صفحه فعال */
+.page.show {
+    display: block !important;
+}
+
+
+/* ===============================
+   PAGE HEADER
+================================ */
+
+.page-header {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+
+/* ===============================
+   SETTINGS PAGE
+================================ */
+
+.settings-page {
+    direction: rtl;
+}
+
+.settings-card {
+    width: 100%;
+    box-sizing: border-box;
+
+    margin-bottom: 20px;
+    padding: 20px;
+
+    border-radius: 22px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.settings-card h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.settings-card p {
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+
+
+/* ===============================
+   FONT SIZE BUTTONS
+================================ */
+
+.font-size-options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.font-size-btn {
+    flex: 1;
+
+    min-width: 80px;
+
+    padding: 12px 10px;
+
+    border: none;
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+    font-size: 15px;
+
+    background: #f0f0f0;
+}
+
+.font-size-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+
+/* ===============================
+   THEME BUTTONS
+================================ */
+
+.theme-options {
+    display: flex;
+    gap: 10px;
+}
+
+.theme-option {
+    flex: 1;
+
+    padding: 12px 10px;
+
+    border: none;
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+    font-size: 15px;
+
+    background: #f0f0f0;
+}
+
+.theme-option.active {
+    background: #667eea;
+    color: white;
+}
+
+
+/* ===============================
+   DEVICE INFORMATION
+================================ */
+
+.device-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 14px 0;
+
+    margin: 0 !important;
+
+    border-bottom:
+        1px solid rgba(0, 0, 0, 0.08);
+}
+
+.device-info:last-child {
+    border-bottom: none;
+}
+
+.device-info strong {
+    opacity: 1;
+}
+
+
+/* ===============================
+   ABOUT PAGE
+================================ */
+
+.about-page {
+    direction: rtl;
+}
+
+.about-card {
+    width: 100%;
+    box-sizing: border-box;
+
+    margin-bottom: 20px;
+    padding: 22px;
+
+    border-radius: 22px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.about-card h2 {
+    margin-top: 0;
+}
+
+.about-icon {
+    font-size: 55px;
+    text-align: center;
+
+    margin-bottom: 10px;
+}
+
+.about-card > h2 {
+    text-align: center;
+}
+
+.version {
+    text-align: center;
+
+    padding: 8px 15px;
+
+    margin: 10px auto 20px;
+
+    width: fit-content;
+
+    border-radius: 20px;
+
+    background: #f0f2ff;
+}
+
+.about-description {
+    width: 100%;
+    margin: 0 auto;
+
+    text-align: center !important;
+    line-height: 2;
+
+    display: block;
+}
+
+
+/* ===============================
+   FEATURES LIST
+================================ */
+
+.features-list {
+    list-style: none;
+
+    padding: 0;
+    margin: 0;
+}
+
+.features-list li {
+    padding: 12px 0;
+
+    border-bottom:
+        1px solid rgba(0, 0, 0, 0.08);
+}
+
+.features-list li:last-child {
+    border-bottom: none;
+}
+
+
+/* ===============================
+   ABOUT FOOTER
+================================ */
+
+.about-footer {
+    text-align: center;
+
+    padding: 20px;
+
+    opacity: 0.7;
+}
+
+
+/* ===============================
+   DARK MODE
+================================ */
+
+body.dark .settings-card,
+body.dark .about-card {
+    background: #1e1e1e;
+}
+
+body.dark .font-size-btn,
+body.dark .theme-option {
+    background: #2a2a2a;
+    color: white;
+}
+
+body.dark .font-size-btn.active,
+body.dark .theme-option.active {
+    background: #667eea;
+}
+
+body.dark .device-info,
+body.dark .features-list li {
+    border-color:
+        rgba(255, 255, 255, 0.1);
+}
+
+body.dark .version {
+    background: #2a2a2a;
+}
+
+
+/* ===============================
+   FONT SIZE SETTINGS
+================================ */
+
+body.font-small {
+    font-size: 14px;
+}
+
+body.font-normal {
+    font-size: 16px;
+}
+
+body.font-large {
+    font-size: 19px;
+}
+
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+
+    .page {
+        padding:
+            20px 15px 100px;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+
+    .settings-card,
+    .about-card {
+        padding: 17px;
+        border-radius: 18px;
+    }
+
+}
+
+/* =========================================
+   GLOBAL FONT SIZE SYSTEM
+========================================= */
+
+body {
+    --font-scale: 1;
+}
+
+/* کوچک */
+body.font-small {
+    --font-scale: 0.90;
+}
+
+/* معمولی - دقیقاً اندازه اصلی */
+body.font-normal {
+    --font-scale: 1;
+}
+
+/* بزرگ */
+body.font-large {
+    --font-scale: 1.12;
+}
+
+/* اعمال روی کل رابط کاربری */
+body.font-small .app,
+body.font-normal .app,
+body.font-large .app,
+body.font-small .page,
+body.font-normal .page,
+body.font-large .page {
+    zoom: var(--font-scale);
+}
+
+/* ================= DATE CONVERTER ================= */
+
+.date-page {
+    padding-bottom: 100px;
+}
+
+
+/* جعبه اصلی */
+
+.date-box {
+    width: 100%;
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    padding: 30px;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 30px;
+
+    box-shadow: var(--card-shadow);
+}
+
+
+/* معرفی */
+
+.date-intro {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.date-icon {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+
+    border-radius: 24px;
+
+    background: #FEE2E2;
+
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.12);
+}
+
+.date-intro h2 {
+    font-size: 23px;
+
+    margin-bottom: 8px;
+}
+
+.date-intro p {
+    color: var(--text-light);
+
+    font-size: 14px;
+
+    line-height: 1.9;
+}
+
+
+/* ================= انتخاب تقویم ================= */
+
+.date-calendar-options {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+}
+
+.date-calendar-option {
+    border: 1px solid var(--border);
+
+    padding: 16px 10px;
+
+    border-radius: 18px;
+
+    background: var(--background);
+
+    color: var(--text);
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    transition: 0.2s;
+}
+
+.date-calendar-option:hover {
+    transform: translateY(-2px);
+
+    border-color: var(--primary);
+
+    box-shadow: 0 8px 18px rgba(20, 184, 166, 0.08);
+}
+
+.date-calendar-option.active {
+    background: var(--primary);
+
+    border-color: var(--primary);
+
+    color: white;
+
+    box-shadow: 0 8px 20px rgba(20, 184, 166, 0.2);
+}
+
+
+/* ================= ورودی تاریخ ================= */
+
+.date-inputs {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 14px;
+
+    margin-bottom: 22px;
+}
+
+.date-input-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.date-input-group label {
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.date-input-group input {
+    width: 100%;
+
+    padding: 15px 10px;
+
+    border: 1px solid var(--border);
+
+    outline: none;
+
+    border-radius: 16px;
+
+    background: var(--background);
+
+    color: var(--text);
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    text-align: center;
+
+    transition: 0.2s;
+}
+
+.date-input-group input:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 4px rgba(20, 184, 166, 0.1);
+}
+
+
+/* ================= دکمه تبدیل ================= */
+
+.calculate-date-btn {
+    width: 100%;
+
+    border: none;
+
+    padding: 16px;
+
+    border-radius: 17px;
+
+    background: var(--primary);
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    box-shadow: 0 8px 18px rgba(20, 184, 166, 0.18);
+}
+
+.calculate-date-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(20, 184, 166, 0.25);
+}
+
+.calculate-date-btn:active {
+    transform: scale(0.98);
+}
+
+
+/* ================= نتیجه ================= */
+
+.date-result {
+    display: none;
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border-radius: 20px;
+
+    background: var(--background);
+
+    border: 1px solid var(--border);
+}
+
+.date-result.show {
+    display: block;
+}
+
+.date-result h3 {
+    margin-top: 0;
+
+    margin-bottom: 15px;
+
+    font-size: 17px;
+}
+
+.date-result-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 15px 5px;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+.date-result-item:last-child {
+    border-bottom: none;
+}
+
+.date-result-item span {
+    color: var(--text-light);
+}
+
+.date-result-item strong {
+    direction: ltr;
+
+    font-size: 16px;
+}
+
+
+/* ================= موبایل ================= */
+
+@media (max-width: 600px) {
+
+    .date-box {
+        margin: 0 auto;
+
+        padding: 20px;
+
+        border-radius: 25px;
+    }
+
+    .date-intro h2 {
+        font-size: 20px;
+    }
+
+    .date-calendar-options {
+        gap: 8px;
+    }
+
+    .date-calendar-option {
+        padding: 14px 5px;
+
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+    .date-inputs {
+        gap: 8px;
+    }
+
+    .date-input-group input {
+        padding: 13px 5px;
+    }
+}
+
+
+/* موبایل */
+
+@media (max-width: 600px) {
+
+    .date-box {
+        margin: 20px 12px;
+        padding: 20px;
+    }
+
+    .date-calendar-options {
+        gap: 8px;
+    }
+
+    .date-calendar-option {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .date-inputs {
+        gap: 8px;
+    }
+
+    .date-input-group input {
+        padding: 12px 5px;
+    }
+
+}
+
+.tool-list-icon.date-icon {
+    width: 55px;
+    height: 55px;
+    font-size: 24px;
+    flex-shrink: 0;
+    border-radius: 17px;
+}
+
+/* ================= UNIT CONVERTER PAGE ================= */
+
+.unit-page {
+    padding-bottom: 100px;
+}
+
+
+/* کادر اصلی */
+
+.unit-page-box {
+    width: min(92%, 650px);
+    margin: 30px auto;
+    padding: 30px;
+    background: var(--card-bg);
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+}
+
+
+/* معرفی */
+
+.unit-page-intro {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.unit-page-icon {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+
+    background: rgba(76, 175, 80, 0.12);
+
+    border-radius: 20px;
+}
+
+.unit-page-intro h2 {
+    margin: 0 0 10px;
+
+    font-size: 24px;
+
+    color: var(--text-color);
+}
+
+.unit-page-intro p {
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    line-height: 1.8;
+}
+
+
+/* ================= انتخاب نوع واحد ================= */
+
+.unit-types {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 30px;
+}
+
+
+.unit-type {
+    border: none;
+
+    padding: 16px 10px;
+
+    border-radius: 18px;
+
+    background: var(--input-bg);
+
+    color: var(--text-color);
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.unit-type span {
+    display: block;
+
+    margin-top: 7px;
+}
+
+
+.unit-type:hover {
+    transform: translateY(-2px);
+}
+
+
+.unit-type.active {
+    background: var(--primary-color);
+
+    color: white;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ================= ورودی‌ها ================= */
+
+.unit-input-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-bottom: 18px;
+}
+
+
+.unit-input-group label {
+    font-weight: 600;
+
+    color: var(--text-color);
+}
+
+
+.unit-input-group input,
+.unit-input-group select {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px 16px;
+
+    border: 2px solid var(--border-color);
+
+    border-radius: 14px;
+
+    outline: none;
+
+    background: var(--input-bg);
+
+    color: var(--text-color);
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.unit-input-group input:focus,
+.unit-input-group select:focus {
+    border-color: var(--primary-color);
+
+    box-shadow:
+        0 0 0 4px rgba(76, 175, 80, 0.10);
+}
+
+
+/* ================= دکمه تبدیل ================= */
+
+.calculate-btn {
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background: var(--primary-color);
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.calculate-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+.calculate-btn:active {
+    transform: scale(0.98);
+}
+
+
+/* ================= نتیجه ================= */
+
+.unit-result {
+    display: none;
+
+    margin-top: 25px;
+
+    padding: 22px;
+
+    border-radius: 18px;
+
+    background: var(--input-bg);
+
+    text-align: center;
+
+    animation: unitResultShow 0.3s ease;
+}
+
+
+.unit-result.show {
+    display: block;
+}
+
+
+.unit-result span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--text-secondary);
+
+    font-size: 15px;
+}
+
+
+.unit-result strong {
+    display: block;
+
+    font-size: 30px;
+
+    color: var(--primary-color);
+
+    direction: ltr;
+}
+
+
+@keyframes unitResultShow {
+
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* ================= حالت تاریک ================= */
+
+body.dark .unit-page-icon {
+    background: rgba(76, 175, 80, 0.16);
+}
+
+
+body.dark .unit-type {
+    background: var(--input-bg);
+}
+
+
+body.dark .unit-type.active {
+    background: var(--primary-color);
+
+    color: white;
+}
+
+
+/* ================= موبایل ================= */
+
+@media (max-width: 600px) {
+
+    .unit-page-box {
+        width: 90%;
+
+        padding: 22px;
+
+        margin-top: 20px;
+
+        border-radius: 20px;
+    }
+
+
+    .unit-types {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 10px;
+    }
+
+
+    .unit-type {
+        padding: 14px 8px;
+
+        font-size: 14px;
+    }
+
+
+    .unit-page-intro h2 {
+        font-size: 21px;
+    }
+
+
+    .unit-page-intro p {
+        font-size: 14px;
+    }
+
+
+    .unit-result strong {
+        font-size: 26px;
+    }
+
+}
+
+/* ===============================
+   PERCENTAGE PAGE
+================================ */
+
+.percentage-page {
+    padding-bottom: 120px;
+}
+
+
+/* ===============================
+   Percentage Box
+================================ */
+
+.percentage-box {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 30px;
+
+    background: var(--card-bg);
+    border-radius: 24px;
+
+    box-shadow: var(--card-shadow);
+
+    border: 1px solid var(--border-color);
+}
+
+
+/* ===============================
+   Intro
+================================ */
+
+.percentage-intro {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+.percentage-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+
+    font-size: 36px;
+
+    background: var(--primary-light);
+    color: var(--primary-color);
+}
+
+/* آیکون درصد داخل لیست ابزارها */
+.tool-list-icon.percentage-icon {
+    width: 55px;
+    height: 55px;
+
+    flex-shrink: 0;
+
+    font-size: 24px;
+
+    border-radius: 17px;
+
+    background: #E0F2FE;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.percentage-intro h2 {
+    margin: 0 0 10px;
+
+    font-size: 24px;
+
+    color: var(--text-primary);
+}
+
+
+.percentage-intro p {
+    margin: 0;
+
+    line-height: 1.8;
+
+    color: var(--text-secondary);
+
+    font-size: 15px;
+}
+
+
+/* ===============================
+   Input Group
+================================ */
+
+.percentage-box .input-group {
+    margin-bottom: 20px;
+}
+
+
+.percentage-box .input-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color: var(--text-primary);
+}
+
+
+.percentage-box .input-group input {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px 16px;
+
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+
+    background: var(--input-bg);
+
+    color: var(--text-primary);
+
+    font-size: 16px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+
+.percentage-box .input-group input:focus {
+    border-color: var(--primary-color);
+
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+
+/* ===============================
+   Calculate Button
+================================ */
+
+.calculate-percentage-btn {
+    width: 100%;
+
+    border: none;
+
+    padding: 16px;
+
+    border-radius: 17px;
+
+    background: var(--primary);
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    box-shadow: 0 8px 18px rgba(20, 184, 166, 0.18);
+}
+
+.calculate-percentage-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(20, 184, 166, 0.25);
+}
+
+.calculate-percentage-btn:active {
+    transform: scale(0.98);
+}
+
+
+/* ===============================
+   Result
+================================ */
+
+.percentage-result {
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border-radius: 16px;
+
+    background: var(--input-bg);
+
+    border: 1px solid var(--border-color);
+}
+
+
+.percentage-result .result-row {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+.percentage-result .result-row span {
+    font-size: 16px;
+
+    color: var(--text-secondary);
+}
+
+
+.percentage-result .result-row strong {
+    font-size: 22px;
+
+    color: var(--primary-color);
+
+    direction: ltr;
+}
+
+
+/* ===============================
+   Mobile
+================================ */
+
+@media (max-width: 600px) {
+
+    .percentage-box {
+        margin: 20px 15px;
+        padding: 22px;
+
+        border-radius: 20px;
+    }
+
+
+    .percentage-icon {
+        width: 60px;
+        height: 60px;
+
+        font-size: 30px;
+    }
+
+
+    .percentage-intro h2 {
+        font-size: 21px;
+    }
+
+
+    .percentage-intro p {
+        font-size: 14px;
+    }
+
+
+    .percentage-box .input-group input {
+        padding: 13px 14px;
+    }
+
+    
+    .percentage-result .result-row {
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+}
+
+/* ================= TIME CONVERTER PAGE ================= */
+
+.time-page {
+    padding-bottom: 100px;
+}
+
+
+/* ================= جعبه اصلی ================= */
+
+.time-page-box {
+    width: min(92%, 650px);
+
+    margin: 30px auto;
+
+    padding: 30px;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 24px;
+
+    box-shadow: var(--card-shadow);
+}
+
+
+/* ================= معرفی ================= */
+
+.time-page-intro {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+.time-page-icon {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+
+    background: #E0F2FE;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 8px 20px rgba(14, 165, 233, 0.12);
+}
+
+
+.time-page-intro h2 {
+    margin: 0 0 10px;
+
+    font-size: 24px;
+}
+
+
+.time-page-intro p {
+    margin: 0;
+
+    color: var(--text-light);
+
+    line-height: 1.8;
+
+    font-size: 14px;
+}
+
+
+/* ================= ردیف تبدیل ================= */
+
+.time-conversion-row {
+    display: grid;
+
+    grid-template-columns: 1.3fr 35px 1fr 1fr;
+
+    align-items: end;
+
+    gap: 10px;
+
+    margin-bottom: 25px;
+}
+
+
+/* ================= ورودی ================= */
+
+.time-input-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.time-input-group label {
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.time-input-group input,
+.time-input-group select {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px 12px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    outline: none;
+
+    background: var(--input-bg);
+
+    color: var(--text);
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.time-input-group input:focus,
+.time-input-group select:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 4px rgba(20, 184, 166, 0.10);
+}
+
+
+/* ================= فلش ================= */
+
+.time-arrow {
+    height: 47px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: var(--primary);
+
+    font-size: 22px;
+
+    font-weight: 700;
+}
+
+
+/* ================= دکمه ================= */
+
+.calculate-time-btn {
+    width: 100%;
+
+    margin-top: 5px;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background: var(--primary);
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.calculate-time-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(20, 184, 166, 0.20);
+}
+
+
+.calculate-time-btn:active {
+    transform: scale(0.98);
+}
+
+
+/* ================= نتیجه ================= */
+
+.time-result {
+    display: none;
+
+    margin-top: 25px;
+
+    padding: 22px;
+
+    border-radius: 18px;
+
+    background: var(--input-bg);
+
+    border: 1px solid var(--border);
+
+    text-align: center;
+}
+
+
+.time-result.show {
+    display: block;
+
+    animation: timeResultShow 0.3s ease;
+}
+
+
+.time-result span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--text-light);
+
+    font-size: 15px;
+}
+
+
+.time-result strong {
+    display: block;
+
+    color: var(--primary);
+
+    font-size: 30px;
+
+    direction: ltr;
+}
+
+
+@keyframes timeResultShow {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}
+
+
+/* ================= حالت تاریک ================= */
+
+body.dark .time-page-icon {
+    background: rgba(14, 165, 233, 0.16);
+}
+
+
+/* ================= موبایل ================= */
+
+@media (max-width: 600px) {
+
+    .time-page-box {
+        width: 90%;
+
+        padding: 22px;
+
+        margin-top: 20px;
+
+        border-radius: 20px;
+    }
+
+
+    .time-page-intro h2 {
+        font-size: 21px;
+    }
+
+
+    .time-page-intro p {
+        font-size: 14px;
+    }
+
+
+    .time-conversion-row {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 12px;
+    }
+
+
+    .time-arrow {
+        display: none;
+    }
+
+
+    .time-input-group:first-child {
+        grid-column: span 2;
+    }
+
+
+    .time-input-group input,
+    .time-input-group select {
+        padding: 13px 10px;
+    }
+
+
+    .time-result strong {
+        font-size: 26px;
+    }
+
+}
+/* ================= REAL WORLD PAGES ================= */
+.realworld-page {
+    display: none;
+}
+.realworld-page.show {
+    display: block;
+}
+
+.realworld-box {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: var(--card-shadow);
+}
+
+.realworld-intro {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.realworld-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 14px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+}
+
+.realworld-intro h2 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.realworld-intro p {
+    color: var(--text-light);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.realworld-result {
+    display: none;
+    margin-top: 24px;
+    padding: 18px;
+    background: var(--input-bg);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+}
+
+.realworld-result.show {
+    display: block;
+}
+
+.school-problems {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.school-problem-card {
+    border: 1px solid var(--border);
+    background: var(--input-bg);
+    color: var(--text);
+    border-radius: 16px;
+    padding: 16px;
+    text-align: right;
+    font-family: inherit;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.school-problem-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.school-problem-card strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+.school-problem-card span {
+    font-size: 13px;
+    color: var(--text-light);
+}
+
+.school-steps {
+    margin-top: 12px;
+}
+
+.school-step {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.school-step:last-child {
+    border-bottom: none;
+}
+
+.school-step strong {
+    color: var(--primary-dark);
+}
+
+/* Soften cards for Windows 11 feel */
+.tool-card,
+.calculator-box,
+.multiples-box,
+.geometry-box,
+.gcd-lcm-box,
+.learning-box,
+.factors-box,
+.date-box,
+.unit-page-box,
+.percentage-box,
+.time-page-box,
+.tools-page-box,
+.settings-card,
+.about-card {
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+}
+
+.welcome-card {
+    border-radius: 24px;
+}
+
+/* Tap highlight */
+button, a, input, select, textarea {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Steps box */
+.steps-box {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--text);
+}
+
+.steps-box .step {
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border);
+}
+
+.steps-box .step:last-child {
+    border-bottom: none;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+body.dark .steps-box .step:last-child {
+    color: #F77737;
+}
+
+.school-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.school-tab {
+    border: 1px solid var(--border);
+    background: var(--input-bg);
+    color: var(--text);
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.school-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.school-form {
+    margin-bottom: 16px;
+}
+
+/* (removed forced always-open desktop sidebar) */
+
+
+.lang-btn, .anim-btn {
+    border: 1px solid var(--border);
+    background: var(--input-bg);
+    color: var(--text);
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.lang-btn.active, .anim-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Hide architecture on mobile */
+@media (max-width: 768px) {
+    #archRow { display: none !important; }
+}
+
+.tool-list-icon img, .tool-icon img {
+    width: 28px;
+    height: 28px;
+}
+
+/* Glassmorphism for cards */
+.tool-card,
+.calculator-box,
+.multiples-box,
+.geometry-box,
+.gcd-lcm-box,
+.learning-box,
+.factors-box,
+.date-box,
+.unit-page-box,
+.percentage-box,
+.time-page-box,
+.tools-page-box,
+.settings-card,
+.about-card,
+.realworld-box,
+.learning-card {
+    background: var(--card) !important;
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid var(--border);
+}
+
+/* Color theme picker buttons */
+.color-theme-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.color-theme-btn {
+    border: 2px solid var(--border);
+    background: var(--input-bg);
+    color: var(--text);
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.color-theme-btn.active {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.color-theme-swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.color-theme-swatch.instagram {
+    background: linear-gradient(135deg, #FCAF45, #E1306C, #833AB4, #405DE6);
+}
+
+.color-theme-swatch.pink-purple {
+    background: linear-gradient(135deg, #EC4899, #D946EF, #7C3AED);
+}
+
+.color-theme-swatch.blue-purple {
+    background: linear-gradient(135deg, #3B82F6, #6366F1, #8B5CF6);
+}
+
+/* Active marker smoother animation */
+.sidebar-item .active-marker {
+    transition: height 0.3s var(--anim-ease), opacity 0.3s var(--anim-ease), top 0.3s var(--anim-ease);
+}
+
+/* Sliding indicator track (optional enhancement via JS position) */
+.sidebar-nav {
+    position: relative;
+}
+
+
+/* ================= REQUESTED ICON + GLASS REFINEMENTS ================= */
+.theme-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.theme-btn .theme-icon {
+    width: 22px;
+    height: 22px;
+    display: block;
+    filter: brightness(0);
+}
+
+body.dark .theme-btn .theme-icon {
+    filter: brightness(0) invert(1);
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.back-btn .back-arrow {
+    width: 18px;
+    height: 18px;
+    display: block;
+    flex: 0 0 auto;
+    filter: brightness(0);
+}
+
+body.dark .back-btn .back-arrow {
+    filter: brightness(0) invert(1);
+}
+
+.calc-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calc-symbol {
+    width: 24px;
+    height: 24px;
+    display: block;
+    filter: brightness(0);
+}
+
+body.dark .calc-symbol {
+    filter: brightness(0) invert(1);
+}
+
+.calc-btn.equals .calc-symbol {
+    filter: brightness(0) invert(1);
+}
+
+.tool-icon img,
+.tool-list-icon img {
+    width: 27px;
+    height: 27px;
+    display: block;
+    filter: brightness(0);
+}
+
+.tool-list-arrow img,
+.learning-arrow img,
+.start-arrow img {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.tool-list-arrow,
+.learning-arrow,
+.start-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure every real-world tool icon has a colored tile too. */
+#toolsPaint .tool-list-icon { background: #FDE2E4; }
+#toolsShopping .tool-list-icon { background: #DCFCE7; }
+#toolsDiscount .tool-list-icon { background: #FEF3C7; }
+#toolsMeasurement .tool-list-icon { background: #E0F2FE; }
+#toolsSchool .tool-list-icon { background: #EDE9FE; }
+
+/* Glassy Windows 11 feel for navigation and cards. */
+.sidebar,
+.tool-list-item,
+.back-btn,
+.theme-btn,
+.tool-card,
+.learning-card {
+    backdrop-filter: blur(24px) saturate(170%);
+    -webkit-backdrop-filter: blur(24px) saturate(170%);
+}
+
+.tool-list-item {
+    background: var(--card);
+}
+
+.welcome-illustration img {
+    width: 78px;
+    height: 78px;
+    display: block;
+    filter: brightness(0) invert(1);
+    animation: heroFloat 3s ease-in-out infinite, heroPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+@keyframes heroPulse {
+    0%, 100% { opacity: .72; }
+    50% { opacity: 1; }
+}
+
+.learning-card .learning-icon {
+    flex: 0 0 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: learningFloat 2.8s ease-in-out infinite;
+}
+
+.learning-card .learning-icon img {
+    width: 32px;
+    height: 32px;
+    display: block;
+    filter: brightness(0);
+}
+
+@keyframes learningFloat {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-5px) rotate(2deg); }
+}
+
+.start-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.start-btn .start-arrow {
+    color: var(--primary-dark);
+}
+
+.start-arrow img {
+    filter: brightness(0);
+}
+
+body.dark .start-arrow img {
+    filter: brightness(0) invert(1);
+}
+
+
+/* ================= PATCH: exact requested visual/accessibility fixes ================= */
+
+/* Sidebar icons: black in light mode, white in dark mode — including chevron. */
+.sidebar-item > .icon,
+.sidebar-item > .chevron,
+.sidebar-item > svg {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+    display: block;
+    filter: brightness(0);
+}
+body.dark .sidebar-item > .icon,
+body.dark .sidebar-item > .chevron,
+body.dark .sidebar-item > svg {
+    filter: brightness(0) invert(1);
+}
+.sidebar-item.active > .icon,
+.sidebar-item.active > .chevron,
+.sidebar-item.active > svg,
+body.dark .sidebar-item.active > .icon,
+body.dark .sidebar-item.active > .chevron,
+body.dark .sidebar-item.active > svg {
+    filter: brightness(0) var(--sidebar-icon-dark-filter, none);
+}
+body.dark .sidebar-item.active > .icon,
+body.dark .sidebar-item.active > .chevron,
+body.dark .sidebar-item.active > svg {
+    filter: brightness(0) invert(1);
+}
+
+/* Dedicated sidebar close/menu icons. */
+.sidebar-toggle .icon,
+.sidebar-close .icon {
+    width: 22px;
+    height: 22px;
+    display: block;
+    filter: brightness(0);
+}
+body.dark .sidebar-toggle .icon,
+body.dark .sidebar-close .icon {
+    filter: brightness(0) invert(1);
+}
+.sidebar-toggle {
+    overflow: hidden;
+}
+
+/* Prevent the school item from being clipped/covered inside the practical-tools group. */
+.sidebar-submenu {
+    max-height: 380px;
+}
+.sidebar-submenu .sidebar-item {
+    flex: 0 0 auto;
+    min-height: 42px;
+}
+.sidebar-nav {
+    padding-bottom: 28px;
+}
+
+/* Intro squares: actual icon inside every colored square. */
+.intro-icon-image {
+    width: 38px;
+    height: 38px;
+    display: block;
+    filter: brightness(0);
+}
+body.dark .intro-icon-image {
+    filter: brightness(0) invert(1);
+}
+.geometry-icon .intro-icon-image,
+.gcd-lcm-icon .intro-icon-image,
+.factors-icon .intro-icon-image,
+.tools-page-icon .intro-icon-image,
+.multiples-icon .intro-icon-image,
+.learning-page-icon .intro-icon-image,
+.date-icon .intro-icon-image,
+.unit-page-icon .intro-icon-image,
+.percentage-icon .intro-icon-image,
+.time-page-icon .intro-icon-image,
+.realworld-icon .intro-icon-image,
+.videos-page-icon .intro-icon-image {
+    width: 38px;
+    height: 38px;
+}
+
+/* Calculator grid must render as 1 2 3 / 4 5 6 / 7 8 9. */
+.calculator-buttons {
+    direction: ltr;
+}
+
+/* Start button arrow is ALWAYS black, in both themes. */
+.start-btn .start-arrow img {
+    filter: brightness(0) !important;
+}
+
+/* About page icons. */
+.about-page-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+}
+.about-title-icon,
+.version-heading img {
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    flex: 0 0 auto;
+    filter: brightness(0);
+}
+body.dark .about-title-icon,
+body.dark .version-heading img {
+    filter: brightness(0) invert(1);
+}
+.about-icon img {
+    width: 76px;
+    height: 76px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+.version-heading {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.features-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.features-list li img {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 22px;
+    display: block;
+    filter: brightness(0);
+}
+body.dark .features-list li img {
+    filter: brightness(0) invert(1);
+}
+
+/* Make the hamburger icon compact on mobile. */
+@media (max-width: 899px) {
+    .sidebar-toggle {
+        width: 44px;
+        height: 44px;
+        padding: 0;
+    }
+    .sidebar-toggle .icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Windows-like fast close, slowing only over the final few pixels. */
+@keyframes sidebarCloseSoft {
+    0% { transform: translateX(0); }
+    82% { transform: translateX(94%); animation-timing-function: cubic-bezier(0.4, 0, 1, 1); }
+    94% { transform: translateX(99%); animation-timing-function: cubic-bezier(0.1, 0, 0.2, 1); }
+    100% { transform: translateX(100%); }
+}
+@media (max-width: 899px) {
+    .sidebar.is-closing {
+        animation: sidebarCloseSoft 0.36s both;
+    }
+    body.no-animations .sidebar.is-closing {
+        animation: none !important;
+        transform: translateX(100%) !important;
+    }
+}
+
+/* Ensure settings animation toggle disables every CSS animation/transition site-wide. */
+body.no-animations,
+body.no-animations * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+}
+
+/* ========== FINAL FIXES (user-requested) ========== */
+
+/* 1) Sidebar icons: black in light, white in dark — ALL including chevron */
+.sidebar-item .icon,
+.sidebar-item .chevron,
+.sidebar-item > img.icon,
+.sidebar-item > img.chevron,
+.sidebar-header .sidebar-close .icon,
+.sidebar-toggle .icon {
+    filter: brightness(0) !important;
+}
+body.dark .sidebar-item .icon,
+body.dark .sidebar-item .chevron,
+body.dark .sidebar-item > img.icon,
+body.dark .sidebar-item > img.chevron,
+body.dark .sidebar-header .sidebar-close .icon,
+body.dark .sidebar-toggle .icon {
+    filter: brightness(0) invert(1) !important;
+}
+/* Active state still white/black accordingly (no color tint override) */
+.sidebar-item.active .icon,
+.sidebar-item.active .chevron {
+    filter: brightness(0) !important;
+}
+body.dark .sidebar-item.active .icon,
+body.dark .sidebar-item.active .chevron {
+    filter: brightness(0) invert(1) !important;
+}
+
+/* 2) Intro icons visible inside colored squares */
+.intro-icon-image,
+.multiples-icon img,
+.geometry-icon img,
+.gcd-lcm-icon img,
+.factors-icon img,
+.learning-page-icon img,
+.date-icon img,
+.unit-page-icon img,
+.percentage-icon img,
+.time-page-icon img,
+.tools-page-icon img,
+.realworld-icon img,
+.videos-page-icon img {
+    width: 38px !important;
+    height: 38px !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    filter: brightness(0);
+}
+body.dark .intro-icon-image,
+body.dark .multiples-icon img,
+body.dark .geometry-icon img,
+body.dark .gcd-lcm-icon img,
+body.dark .factors-icon img,
+body.dark .learning-page-icon img,
+body.dark .date-icon img,
+body.dark .unit-page-icon img,
+body.dark .percentage-icon img,
+body.dark .time-page-icon img,
+body.dark .tools-page-icon img,
+body.dark .realworld-icon img,
+body.dark .videos-page-icon img {
+    filter: brightness(0) invert(1);
+}
+
+/* Ensure colored icon containers center the img */
+.multiples-icon,
+.geometry-icon,
+.gcd-lcm-icon,
+.factors-icon,
+.learning-page-icon,
+.date-icon,
+.unit-page-icon,
+.percentage-icon,
+.time-page-icon,
+.tools-page-icon,
+.realworld-icon,
+.videos-page-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* 10) Start button arrow ALWAYS black */
+.start-btn .start-arrow img,
+.start-btn .start-arrow {
+    filter: brightness(0) !important;
+}
+body.dark .start-btn .start-arrow img {
+    filter: brightness(0) !important;
+}
+
+/* 11) School item in sidebar not clipped */
+.sidebar-submenu {
+    max-height: 0;
+    overflow: hidden;
+}
+.sidebar-submenu.open {
+    max-height: 420px !important;
+    overflow: visible;
+}
+.sidebar-submenu .sidebar-item {
+    min-height: 44px;
+    flex-shrink: 0;
+}
+.sidebar-nav {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 32px;
+}
+
+/* 12) Calculator number order LTR: 1 2 3 / 4 5 6 / 7 8 9 */
+.calculator-buttons {
+    direction: ltr !important;
+}
+.calculator-display {
+    direction: ltr !important;
+}
+
+/* 13) Mobile hamburger icon size compact */
+@media (max-width: 899px) {
+    .sidebar-toggle {
+        width: 44px !important;
+        height: 44px !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+    .sidebar-toggle .icon {
+        width: 22px !important;
+        height: 22px !important;
+        max-width: 22px;
+        max-height: 22px;
+    }
+}
+
+/* 14) Ensure toggle is clickable above content */
+.sidebar-toggle {
+    z-index: 2100 !important;
+    pointer-events: auto !important;
+}
+
+/* 15) Windows-like soft close already defined; reinforce */
+@media (max-width: 899px) {
+    .sidebar {
+        transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .sidebar.is-closing {
+        animation: sidebarCloseSoft 0.38s both !important;
+        transition: none !important;
+    }
+}
+
+/* Learning card looks clickable */
+.learning-card {
+    cursor: pointer;
+}
+
+/* About footer spacing */
+.about-footer {
+    text-align: center;
+    margin-top: 24px;
+    padding: 18px;
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+/* Features list icons visible */
+.features-list li img {
+    width: 22px !important;
+    height: 22px !important;
+    filter: brightness(0);
+    flex-shrink: 0;
+}
+body.dark .features-list li img {
+    filter: brightness(0) invert(1);
+}
+
+/* info icon in about title / version */
+.about-title-icon,
+.version-heading img {
+    width: 22px !important;
+    height: 22px !important;
+    filter: brightness(0);
+}
+body.dark .about-title-icon,
+body.dark .version-heading img {
+    filter: brightness(0) invert(1);
+}
+
+/* ========== WIN11 THIN ROUNDED SIDEBAR + DESKTOP COLLAPSIBLE + AVATAR ========== */
+
+:root {
+    --sidebar-width: 240px;
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    border-radius: 0 0 0 18px;
+    border-left: 1px solid var(--sidebar-border);
+    box-shadow: -6px 0 28px rgba(0, 0, 0, 0.07);
+}
+
+/* Desktop: sidebar can close; show close button; content centers when closed */
+@media (min-width: 900px) {
+    .sidebar {
+        transform: translateX(100%);
+        border-radius: 18px;
+        top: 10px;
+        right: 10px;
+        height: calc(100vh - 20px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    }
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    .sidebar.is-closing {
+        animation: sidebarCloseSoftDesktop 0.4s both;
+    }
+    .sidebar-toggle {
+        display: flex !important;
+        top: 16px;
+        right: 16px;
+    }
+    .sidebar-close {
+        display: flex !important;
+    }
+    .sidebar-overlay {
+        display: none !important;
+    }
+    body.sidebar-open .sidebar-toggle {
+        display: none !important;
+    }
+    /* Content shifts only when sidebar open */
+    .app {
+        margin-right: 0 !important;
+        width: 100% !important;
+        max-width: 720px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        transition: margin var(--anim-duration) var(--anim-ease),
+                    max-width var(--anim-duration) var(--anim-ease),
+                    transform var(--anim-duration) var(--anim-ease);
+    }
+    body.sidebar-open .app {
+        margin-right: calc(var(--sidebar-width) + 24px) !important;
+        margin-left: 12px !important;
+        max-width: calc(100% - var(--sidebar-width) - 48px) !important;
+        width: auto !important;
+    }
+}
+
+@keyframes sidebarCloseSoftDesktop {
+    0% { transform: translateX(0); }
+    80% { transform: translateX(92%); animation-timing-function: cubic-bezier(0.4, 0, 1, 1); }
+    94% { transform: translateX(98.5%); animation-timing-function: cubic-bezier(0.1, 0, 0.2, 1); }
+    100% { transform: translateX(100%); }
+}
+
+body.no-animations .sidebar.is-closing {
+    animation: none !important;
+}
+
+/* Mobile sidebar stays full-height edge (don't change mobile much) */
+@media (max-width: 899px) {
+    .sidebar {
+        border-radius: 18px 0 0 18px;
+        top: 0;
+        right: 0;
+        height: 100vh;
+    }
+}
+
+/* Sidebar logo as button (avatar) */
+button.sidebar-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    box-shadow: 0 4px 12px rgba(225, 48, 108, 0.25);
+}
+button.sidebar-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+button.sidebar-logo:hover {
+    transform: scale(1.05);
+}
+
+/* Tools list icons ALWAYS black (light colored tiles) */
+.tool-list-icon img,
+.tool-icon img,
+.tools-list .tool-list-icon img {
+    filter: brightness(0) !important;
+}
+body.dark .tool-list-icon img,
+body.dark .tool-icon img,
+body.dark .tools-list .tool-list-icon img {
+    filter: brightness(0) !important;
+}
+
+/* Submenu expand without overlap jump */
+.sidebar-submenu {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.32s var(--anim-ease);
+    max-height: none !important;
+    overflow: hidden;
+    padding-right: 8px;
+}
+.sidebar-submenu > * {
+    min-height: 0;
+    overflow: hidden;
+}
+.sidebar-submenu.open {
+    grid-template-rows: 1fr;
+    max-height: none !important;
+    overflow: hidden;
+}
+.sidebar-submenu .sidebar-item {
+    min-height: 42px;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.sidebar-submenu.open .sidebar-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Avatar page */
+.avatar-page {
+    display: none;
+}
+.avatar-page.show {
+    display: block;
+}
+.avatar-box {
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(20px) saturate(160%);
+}
+.avatar-intro {
+    text-align: center;
+    margin-bottom: 22px;
+}
+.avatar-intro h2 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+.avatar-intro p {
+    color: var(--text-light);
+    font-size: 14px;
+    line-height: 1.8;
+}
+.avatar-preview-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+}
+.avatar-crop-stage {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--background);
+    border: 3px solid var(--primary);
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+}
+.avatar-crop-stage:active {
+    cursor: grabbing;
+}
+.avatar-crop-stage img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    max-width: none;
+    transform: translate(-50%, -50%) scale(1);
+    transform-origin: center center;
+    pointer-events: none;
+    user-select: none;
+}
+.avatar-crop-circle {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,0.35);
+}
+.avatar-zoom-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+.avatar-zoom-row label {
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.avatar-zoom-row input[type="range"] {
+    flex: 1;
+    accent-color: var(--primary);
+}
+.avatar-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+.avatar-upload-btn {
+    flex: 1;
+    min-width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--input-bg);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.avatar-upload-btn:hover {
+    border-color: var(--primary);
+}
+.avatar-actions .calculate-btn {
+    flex: 1;
+    min-width: 140px;
+    margin: 0;
+}
+.avatar-defaults-title {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+.avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+.avatar-option {
+    border: 2px solid var(--border);
+    background: transparent;
+    border-radius: 50%;
+    padding: 0;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 1;
+    transition: 0.2s;
+}
+.avatar-option img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.avatar-option:hover,
+.avatar-option.active {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+@media (max-width: 500px) {
+    .avatar-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+    .avatar-crop-stage {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+/* Profile header icon can show user avatar too */
+.profile-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+}
+
+/* Submenu inner wrapper for smooth expand without overlap */
+.sidebar-submenu {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    padding-right: 6px;
+}
+.sidebar-submenu.open {
+    grid-template-rows: 1fr;
+}
+.sidebar-submenu-inner {
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.sidebar-submenu .sidebar-item {
+    opacity: 1;
+    transform: none;
+}
+
+/* FINAL DESKTOP SIDEBAR OVERRIDE — collapsible Win11 style */
+@media (min-width: 900px) {
+    .sidebar {
+        transform: translateX(100%) !important;
+        border-radius: 18px !important;
+        top: 10px !important;
+        right: 10px !important;
+        height: calc(100vh - 20px) !important;
+        width: var(--sidebar-width) !important;
+    }
+    .sidebar.open {
+        transform: translateX(0) !important;
+    }
+    .sidebar-toggle {
+        display: flex !important;
+    }
+    body.sidebar-open .sidebar-toggle {
+        display: none !important;
+    }
+    .sidebar-close {
+        display: flex !important;
+    }
+    .sidebar-overlay {
+        display: none !important;
+    }
+    .app {
+        margin-right: auto !important;
+        margin-left: auto !important;
+        width: 100% !important;
+        max-width: 720px !important;
+        transition: margin 0.3s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    body.sidebar-open .app {
+        margin-right: calc(var(--sidebar-width) + 28px) !important;
+        margin-left: 16px !important;
+        max-width: calc(100% - var(--sidebar-width) - 56px) !important;
+        width: auto !important;
+    }
+}
+
+/* ========== FIXES ROUND 3 ========== */
+
+:root {
+    --sidebar-width: 280px;
+}
+
+/* Simple avatar preview - full image, rounded */
+.avatar-preview-circle {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--primary);
+    box-shadow: var(--card-shadow);
+    background: var(--background);
+}
+.avatar-preview-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.avatar-crop-stage,
+.avatar-zoom-row {
+    display: none !important;
+}
+
+/* Tools page intro icon always black */
+.tools-page-icon .intro-icon-image,
+.tools-page-icon img {
+    filter: brightness(0) !important;
+}
+body.dark .tools-page-icon .intro-icon-image,
+body.dark .tools-page-icon img {
+    filter: brightness(0) !important;
+}
+
+/* Settings page title icon */
+.settings-page-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+.settings-title-icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0);
+}
+body.dark .settings-title-icon {
+    filter: brightness(0) invert(1);
+}
+
+/* Font-size and theme option buttons follow color theme */
+.font-size-btn,
+.theme-option {
+    border: 1px solid var(--border);
+    background: var(--input-bg);
+    color: var(--text);
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.font-size-btn.active,
+.theme-option.active {
+    background: var(--primary) !important;
+    color: #fff !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+.font-size-btn:hover,
+.theme-option:hover {
+    border-color: var(--primary);
+}
+
+/* Desktop layout: when sidebar closed, content wide & centered with equal margins */
+@media (min-width: 900px) {
+    :root {
+        --sidebar-width: 280px;
+    }
+    .sidebar {
+        width: var(--sidebar-width) !important;
+        transform: translateX(100%) !important;
+        border-radius: 16px !important;
+        top: 12px !important;
+        right: 12px !important;
+        height: calc(100vh - 24px) !important;
+    }
+    .sidebar.open {
+        transform: translateX(0) !important;
+    }
+    .app {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: min(960px, calc(100% - 48px)) !important;
+        max-width: min(960px, calc(100% - 48px)) !important;
+        padding: 28px 24px !important;
+        box-sizing: border-box !important;
+        transition: width 0.3s ease, max-width 0.3s ease, margin 0.3s ease !important;
+    }
+    body.sidebar-open .app {
+        /* shift left a bit so space for sidebar on the right; keep readable width */
+        margin-right: calc(var(--sidebar-width) + 28px) !important;
+        margin-left: 24px !important;
+        width: calc(100% - var(--sidebar-width) - 52px) !important;
+        max-width: calc(100% - var(--sidebar-width) - 52px) !important;
+    }
+}
+
+/* Submenu: ensure no clipping of last items */
+.sidebar-submenu {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+    overflow: hidden;
+}
+.sidebar-submenu.open {
+    grid-template-rows: 1fr;
+}
+.sidebar-submenu-inner {
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-bottom: 4px;
+}
+.sidebar-submenu .sidebar-item {
+    min-height: 44px;
+    flex-shrink: 0;
+}
+.sidebar-nav {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 40px;
+}
+
+/* Sidebar logo avatar rounded */
+button.sidebar-logo,
+button.sidebar-logo img {
+    border-radius: 12px;
+}
+
+
+/* ========== FIXES ROUND 4 (sidebar close sync + full hide + width + submenu) ========== */
+
+.sidebar {
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+@media (min-width: 900px) {
+    .sidebar {
+        transform: translateX(calc(100% + 28px)) !important;
+    }
+    .sidebar.open {
+        transform: translateX(0) !important;
+    }
+    .sidebar.is-closing {
+        animation: none !important;
+        transform: translateX(calc(100% + 28px)) !important;
+    }
+
+    .app {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: calc(100% - 48px) !important;
+        max-width: calc(100% - 48px) !important;
+        padding: 28px 24px !important;
+        box-sizing: border-box !important;
+        transition: width 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+                    max-width 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+                    margin 0.32s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    body.sidebar-open .app {
+        margin-right: calc(var(--sidebar-width) + 28px) !important;
+        margin-left: 24px !important;
+        width: calc(100% - var(--sidebar-width) - 52px) !important;
+        max-width: calc(100% - var(--sidebar-width) - 52px) !important;
+    }
+}
+
+@media (max-width: 899px) {
+    .sidebar {
+        transform: translateX(calc(100% + 8px));
+    }
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    .sidebar.is-closing {
+        animation: none !important;
+        transform: translateX(calc(100% + 8px)) !important;
+    }
+}
+
+.sidebar-submenu {
+    display: grid !important;
+    grid-template-rows: 0fr !important;
+    transition: grid-template-rows 0.3s ease !important;
+    overflow: hidden !important;
+    max-height: none !important;
+}
+.sidebar-submenu.open {
+    grid-template-rows: 1fr !important;
+    overflow: visible !important;
+    max-height: none !important;
+}
+.sidebar-submenu-inner {
+    min-height: 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    padding-bottom: 6px !important;
+}
+.sidebar-submenu.open .sidebar-submenu-inner {
+    overflow: visible !important;
+}
+.sidebar-submenu .sidebar-item {
+    min-height: 44px !important;
+    flex-shrink: 0 !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+.sidebar-nav {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding-bottom: 48px !important;
+}
+
+
+/* ========== USER REQUEST: WIN11 THIN SCROLLBARS EVERYWHERE ========== */
+*, *::before, *::after {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(120, 120, 120, 0.40) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(120, 120, 120, 0.38);
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(120, 120, 120, 0.56);
+    border: 1px solid transparent;
+    background-clip: padding-box;
+}
+
+body.dark *, body.dark *::before, body.dark *::after {
+    scrollbar-color: rgba(180, 180, 180, 0.34) transparent;
+}
+
+body.dark ::-webkit-scrollbar-thumb {
+    background: rgba(180, 180, 180, 0.34);
+}
+
+body.dark ::-webkit-scrollbar-thumb:hover {
+    background: rgba(180, 180, 180, 0.52);
+}
+
+/* ========== USER REQUEST: COLORED-TILE ICONS ALWAYS BLACK ========== */
+.tool-icon img,
+.tool-list-icon img,
+.multiples-icon .intro-icon-image,
+.geometry-icon .intro-icon-image,
+.gcd-lcm-icon .intro-icon-image,
+.factors-icon .intro-icon-image,
+.learning-page-icon .intro-icon-image,
+.date-icon .intro-icon-image,
+.unit-page-icon .intro-icon-image,
+.percentage-icon .intro-icon-image,
+.time-page-icon .intro-icon-image,
+.tools-page-icon .intro-icon-image,
+.realworld-icon .intro-icon-image,
+.videos-page-icon .intro-icon-image,
+.learning-card .learning-icon img,
+.calc-btn.operator .calc-symbol,
+.calc-btn.equals .calc-symbol {
+    filter: brightness(0) !important;
+}
+
+/* Icons with no colored background follow the light/dark theme. */
+.tool-list-arrow img,
+.learning-arrow img {
+    filter: brightness(0);
+}
+
+body.dark .tool-list-arrow img,
+body.dark .learning-arrow img {
+    filter: brightness(0) invert(1);
+}
+
+/* The version title and its info icon are centered together. */
+.version-heading {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+/* Explicitly keep colored-tile icon filters black in dark mode too. */
+body.dark .tool-icon img,
+body.dark .tool-list-icon img,
+body.dark .multiples-icon .intro-icon-image,
+body.dark .geometry-icon .intro-icon-image,
+body.dark .gcd-lcm-icon .intro-icon-image,
+body.dark .factors-icon .intro-icon-image,
+body.dark .learning-page-icon .intro-icon-image,
+body.dark .date-icon .intro-icon-image,
+body.dark .unit-page-icon .intro-icon-image,
+body.dark .percentage-icon .intro-icon-image,
+body.dark .time-page-icon .intro-icon-image,
+body.dark .tools-page-icon .intro-icon-image,
+body.dark .realworld-icon .intro-icon-image,
+body.dark .videos-page-icon .intro-icon-image,
+body.dark .learning-card .learning-icon img,
+body.dark .calc-btn.operator .calc-symbol,
+body.dark .calc-btn.equals .calc-symbol {
+    filter: brightness(0) !important;
+}
+
+/* ========== MOBILE INSTALL BANNER ========== */
+.mobile-install-banner {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5000;
+    padding: 12px 14px 14px;
+    background: var(--gradient-hero);
+    color: #fff;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+    transform: translateY(-110%);
+    opacity: 0;
+    transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.32s ease;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    direction: inherit;
+}
+.mobile-install-banner.show {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+}
+.mobile-install-banner.hiding {
+    transform: translateY(-110%);
+    opacity: 0;
+}
+.mib-close {
+    position: absolute;
+    top: 10px;
+    left: 10px; /* RTL: left side for close, like common mobile banners */
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s, transform 0.2s;
+}
+html[dir="ltr"] .mib-close {
+    left: auto;
+    right: 10px;
+}
+.mib-close:active {
+    transform: scale(0.92);
+    background: rgba(255, 255, 255, 0.3);
+}
+.mib-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 8px 10px 40px;
+}
+html[dir="ltr"] .mib-content {
+    padding: 4px 40px 10px 8px;
+}
+.mib-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: #fff;
+}
+.mib-text {
+    flex: 1;
+    min-width: 0;
+}
+.mib-title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 2px;
+}
+.mib-sub {
+    font-size: 12px;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+.mib-actions {
+    display: flex;
+    gap: 8px;
+    padding: 0 4px;
+}
+.mib-btn {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    color: var(--primary-dark);
+    background: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 8px;
+    border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.mib-btn:active {
+    transform: scale(0.97);
+}
+/* Only mobile */
+@media (min-width: 900px) {
+    .mobile-install-banner {
+        display: none !important;
+    }
+}
+
+/* ========== MODERN TOUCH: remove blue flash, soft press ========== */
+html {
+    -webkit-tap-highlight-color: transparent !important;
+}
+* {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none;
+}
+button,
+a,
+.tool-card,
+.tool-list-item,
+.nav-item,
+.sidebar-item,
+.calc-btn,
+.shape-card,
+.font-size-btn,
+.theme-option,
+.lang-btn,
+.anim-btn,
+.color-theme-btn,
+.back-btn,
+.start-btn,
+.avatar-option {
+    -webkit-tap-highlight-color: transparent !important;
+    outline: none;
+}
+button:active,
+.tool-card:active,
+.tool-list-item:active,
+.sidebar-item:active,
+.calc-btn:active,
+.shape-card:active,
+.back-btn:active,
+.start-btn:active,
+.avatar-option:active,
+.mib-btn:active {
+    transform: scale(0.97);
+    transition: transform 0.12s ease;
+}
+
+/* ========== SIDEBAR MOBILE SCROLL FIX ========== */
+/* Prevent body scroll when sidebar open; keep sidebar fixed and scrollable inside */
+@media (max-width: 899px) {
+    body.sidebar-open {
+        overflow: hidden !important;
+        position: fixed !important;
+        width: 100% !important;
+        height: 100% !important;
+        touch-action: none;
+    }
+    .sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        height: 100% !important;
+        height: 100dvh !important;
+        max-height: 100% !important;
+        max-height: 100dvh !important;
+        overscroll-behavior: contain;
+        touch-action: pan-y;
+    }
+    .sidebar-nav {
+        overflow-y: auto !important;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+}
+
+/* ========== MOBILE INSTALL BANNER ========== */
+.mobile-install-banner {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5000;
+    padding: 12px 14px 14px;
+    background: var(--gradient-hero);
+    color: #fff;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+    transform: translateY(-110%);
+    opacity: 0;
+    transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.32s ease;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    direction: inherit;
+}
+.mobile-install-banner.show {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+}
+.mobile-install-banner.hiding {
+    transform: translateY(-110%);
+    opacity: 0;
+}
+.mib-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s, transform 0.2s;
+}
+html[dir="ltr"] .mib-close {
+    right: auto;
+    left: 10px;
+}
+.mib-close:active {
+    transform: scale(0.92);
+    background: rgba(255, 255, 255, 0.3);
+}
+.mib-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 40px 10px 8px;
+}
+html[dir="ltr"] .mib-content {
+    padding: 4px 8px 10px 40px;
+}
+.mib-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: #fff;
+}
+.mib-text {
+    flex: 1;
+    min-width: 0;
+}
+.mib-title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 2px;
+}
+.mib-sub {
+    font-size: 12px;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+.mib-actions {
+    display: flex;
+    gap: 8px;
+    padding: 0 4px;
+}
+.mib-btn {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    color: var(--primary-dark);
+    background: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 8px;
+    border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.mib-btn:active {
+    transform: scale(0.97);
+}
+@media (min-width: 900px) {
+    .mobile-install-banner {
+        display: none !important;
+    }
+}
+
+/* ========== MODERN TOUCH: remove blue flash ========== */
+html {
+    -webkit-tap-highlight-color: transparent !important;
+}
+* {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none;
+}
+button,
+a,
+.tool-card,
+.tool-list-item,
+.nav-item,
+.sidebar-item,
+.calc-btn,
+.shape-card,
+.font-size-btn,
+.theme-option,
+.lang-btn,
+.anim-btn,
+.color-theme-btn,
+.back-btn,
+.start-btn,
+.avatar-option {
+    -webkit-tap-highlight-color: transparent !important;
+    outline: none;
+}
+button:active,
+.tool-card:active,
+.tool-list-item:active,
+.sidebar-item:active,
+.calc-btn:active,
+.shape-card:active,
+.back-btn:active,
+.start-btn:active,
+.avatar-option:active,
+.mib-btn:active {
+    transform: scale(0.97);
+    transition: transform 0.12s ease;
+}
+
+/* ========== SIDEBAR MOBILE SCROLL FIX ========== */
+@media (max-width: 899px) {
+    body.sidebar-open {
+        overflow: hidden !important;
+        position: fixed !important;
+        width: 100% !important;
+        height: 100% !important;
+        touch-action: none;
+    }
+    .sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        height: 100% !important;
+        height: 100dvh !important;
+        max-height: 100% !important;
+        max-height: 100dvh !important;
+        overscroll-behavior: contain;
+        touch-action: pan-y;
+    }
+    .sidebar-nav {
+        overflow-y: auto !important;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+}
