@@ -1,0 +1,52 @@
+
+name: Build MathMate Windows EXE
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'index.html'
+      - 'style.css'
+      - 'script.js'
+      - 'favicon.png'
+      - 'assets/**'
+      - 'fonts/**'
+      - 'desktop/**'
+      - '.github/workflows/build-windows-exe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Check out MathMate
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Prepare the desktop app files
+        shell: pwsh
+        run: ./desktop/prepare-site.ps1
+
+      - name: Install desktop build dependencies
+        working-directory: desktop
+        run: npm install
+
+      - name: Build Windows applications
+        working-directory: desktop
+        run: npm run dist:win
+
+      - name: Upload EXE files
+        uses: actions/upload-artifact@v4
+        with:
+          name: MathMate-Windows-EXE
+          path: desktop/dist/*.exe
+          if-no-files-found: error
+          retention-days: 14
